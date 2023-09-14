@@ -1,3 +1,5 @@
+import NavBar from "../components/atoms/NavBar";
+
 function Registro() {
     return ( 
         <>

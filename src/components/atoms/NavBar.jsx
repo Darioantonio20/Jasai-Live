@@ -4,6 +4,9 @@ import ImgJasaiLogo from "../../assets/img/jasaiLogo.png";
 function NavBar() {
     return ( 
         <>
+        <div className="pt-2 pb-1 bg-black">
+           <p className="text-light text-center fs-5">"Tu confianza es nuestra mejor recompensa"</p> 
+        </div>
         <nav className="navbar navbar-expand-lg bg-body-tertiary">
             <div className="container-fluid">
                 <div className="ms-5">
@@ -15,19 +18,19 @@ function NavBar() {
                 <div className="collapse navbar-collapse justify-content-center" id="navbarNav">
                     <ul className="navbar-nav fw-medium fs-4">
                         <li className="nav-item m-2">
-                            <Link to="/" className="nav-link" href="#">INICIO</Link>
+                            <Link to="/" className="nav-link" href="#">Inicio</Link>
                         </li>
                         <li className="nav-item m-2">
-                            <Link to="/visualizacionBoletos" className="nav-link" href="#">EVENTOS</Link>
+                            <Link to="/visualizacionBoletos" className="nav-link" href="#">Eventos</Link>
                         </li>
                         <li className="nav-item m-2">
-                            <Link to="/compraBoletos" className="nav-link" href="#">COMPRA DE BOLETOS</Link>
+                            <Link to="/compraBoletos" className="nav-link" href="#">Compra de boletos</Link>
                         </li>
                         <li className="nav-item m-2">
-                            <Link to="/" className="nav-link" href="#">SOBRE NOSOTROS</Link>
+                            <Link to="/" className="nav-link" href="#">Sobre nosotros</Link>
                         </li>
                         <li className="nav-item m-2">
-                            <Link to="/inicioSesion" className="nav-link" href="#">MI CUENTA</Link>
+                            <Link to="/inicioSesion" className="nav-link" href="#">Mi cuenta</Link>
                         </li>
                     </ul>
                 </div>

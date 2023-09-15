@@ -1,5 +1,9 @@
 /*----------Pages-Styles------------*/
 
+*body{
+    font-family: sans-serif;
+}
+
 /*Footer*/
 
 .footerSectionDerechosDeAutor{
@@ -16,7 +20,6 @@
 
 .tituloSection2{
     color: #000000;
-    font-family: Bebas Neue;
     font-size: 4.375rem;
     font-style: normal;
     font-weight: 400;
@@ -25,7 +28,6 @@
 }
 .parrafoSection2{
     color: #5f5e5e;
-    font-family: Bebas Neue;
     font-size: 2.5rem;
     font-style: normal;
     font-weight: 500;
@@ -37,7 +39,6 @@
     margin-bottom: 2rem;
     color: #5f5e5e;
     text-align: center;
-    font-family: Bebas Neue;
     font-size: 2.5rem;
     font-style: normal;
     font-weight: 500;
@@ -46,11 +47,36 @@
 .textoSection2{
     color: #787878;
     text-align: justify;
-    font-family: Bebas Neue;
     font-size: 2rem;
     font-style: normal;
     font-weight: 350;
     line-height: 45px; 
 }
 
+/*--------*/
+
+/*Section3*/
+
+.section3ColorFondo{
+    background-color: #2E2E2E;
+    color: #787878;
+}
+.tituloSection3{
+    text-align: center;
+    font-size: 3.5rem;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+}
+.textoSection3{
+    font-size: 2rem;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+    text-align: center;
+}
+.imgResponsiva{
+    height: 100%;
+    width: 100%;
+}
 /*--------*/

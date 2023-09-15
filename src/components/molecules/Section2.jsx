@@ -17,7 +17,7 @@ function Section2() {
                     <p className="textoSection2">La visualización en línea de conciertos en tiempo real permite a los espectadores disfrutar de eventos desde cualquier ubicación con una buena conexión a internet. Esto amplía la audiencia y mejora la experiencia del usuario, lo que es especialmente relevante en el contexto actual de restricciones de asistencia a eventos en vivo</p>
                 </div>
                 <div className="col-sm-12 col-md-6 col-lg-6 col-xl-6">
-                    <img className="img-fluid" src={IgamenSection2Conjunto} ></img>
+                    <img className="imgResponsiva" src={IgamenSection2Conjunto} ></img>
                 </div>
             </div>
         </div>

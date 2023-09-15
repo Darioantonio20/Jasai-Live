@@ -11,3 +11,46 @@
 }
 
 /*------*/
+
+/*Section2*/
+
+.tituloSection2{
+    color: #000000;
+    font-family: Bebas Neue;
+    font-size: 4.375rem;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+    margin-bottom: 1rem;
+}
+.parrafoSection2{
+    color: #5f5e5e;
+    font-family: Bebas Neue;
+    font-size: 2.5rem;
+    font-style: normal;
+    font-weight: 500;
+    line-height: normal;
+    margin-bottom: 2rem;
+}
+.parrafo2Section2{
+    margin-top: 2rem;
+    margin-bottom: 2rem;
+    color: #5f5e5e;
+    text-align: center;
+    font-family: Bebas Neue;
+    font-size: 2.5rem;
+    font-style: normal;
+    font-weight: 500;
+    line-height: normal;
+}
+.textoSection2{
+    color: #787878;
+    text-align: justify;
+    font-family: Bebas Neue;
+    font-size: 2rem;
+    font-style: normal;
+    font-weight: 350;
+    line-height: 45px; 
+}
+
+/*--------*/

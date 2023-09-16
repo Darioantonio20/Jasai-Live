@@ -7,9 +7,9 @@ function Footer() {
                 <div className="row mt-3">
                     <div className="col-md-3 col-lg-3 col-xl-2 mx-auto mb-4">
                         <h6 className="text-uppercase fw-bold mb-4">Siguenos</h6>
-                        <i class="fa-brands fa-xl fa-facebook fa-beat iconoRedes m-2"></i>
-                        <i class="fa-brands fa-xl fa-twitter fa-beat iconoRedes m-2"></i>
-                        <i class="fa-brands fa-tiktok fa-beat fa-xl iconoRedes m-2"></i>
+                        <i className="fa-brands fa-xl fa-facebook fa-beat iconoRedes m-2"></i>
+                        <i className="fa-brands fa-xl fa-twitter fa-beat iconoRedes m-2"></i>
+                        <i className="fa-brands fa-tiktok fa-beat fa-xl iconoRedes m-2"></i>
                     </div>
                         <div className="col-md-2 col-lg-2 col-xl-2 mx-auto mb-4"> 
                         <h6 className="text-uppercase fw-bold mb-4">Terminos Legales</h6>

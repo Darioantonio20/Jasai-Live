@@ -8,8 +8,8 @@ import "../../assets/styles/Pages.css";
 function Section4() {
     return ( 
         <>
-        <div id="carouselExample" class="carousel slide">
-            <div class="carousel-inner">
+        <div id="carouselExample" className="carousel slide">
+            <div className="carousel-inner">
                 <div className="container-fluid align">
                     <h2 className="TituloSection4 mb-5 mt-5">Explorar más eventos</h2>
                     <div className="carousel-item active">
@@ -41,13 +41,13 @@ function Section4() {
                         </div>
                     </div>
                 </div>
-                <button class="carousel-control-prev" type="button" data-bs-target="#carouselExample" data-bs-slide="prev">
+                <button className="carousel-control-prev" type="button" data-bs-target="#carouselExample" data-bs-slide="prev">
                     <img src={IconoPreview} aria-hidden="true"></img>
-                    <span class="visually-hidden">Previous</span>
+                    <span className="visually-hidden">Previous</span>
                 </button>
-                <button class="carousel-control-next" type="button" data-bs-target="#carouselExample" data-bs-slide="next">
+                <button className="carousel-control-next" type="button" data-bs-target="#carouselExample" data-bs-slide="next">
                     <img src={IconoNext}  aria-hidden="true"></img>
-                    <span class="visually-hidden">Next</span>
+                    <span className="visually-hidden">Next</span>
                 </button>
             </div>
             <div className="d-flex justify-content-center m-5">

@@ -166,3 +166,27 @@
 }
 
 /*--------*/
+
+/*BoletoInfo*/
+
+.fondoBoleto{
+   
+}
+
+/*----------*/
+
+/*Login-&&-Register*/
+
+.cascading-right {
+    margin-right: -50px;
+}
+@media (max-width: 991.98px) {
+    .cascading-right {
+      margin-right: 0;
+  }
+  }
+.estiloCard{
+    background: rgba(235, 235, 235, 0.87);
+    backdrop-filter: blur(30px);
+}
+/*-----------------*/

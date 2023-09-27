@@ -5,21 +5,44 @@ import ImgLoginRegisterFondo from "../assets/img/imgLoginRegister.png";
 
 function InicioSesion() {
 
+    {/*constructor(){
+        super()
+        this.state={
+            email:null,
+            password:null,
+        }
+    }
+    login=()=>{
+        axios.post('http://localhost:8080/api/login',response);
+
+    }*/}
+
+    //fetch('http://localhost:8080/api/login',{
+        //method:'POST',
+        //headers:{'Content-Type':'aplication/json'},
+        //body:JSON.stringify(data)
+        //}).then(
+          //  response=>response.json()
+      //  ).then(
+        //    data=>{alert(data)}
+        //)
+    
+
     const [password, setPassword] = useState();
-    const [username, setUsername] = useState();
+    const [email, setEmail] = useState();
 
     const handdleLogin = (e) =>{
         e.preventDefault();
         console.log({
-            username: username,
+            email: email,
             password: password
         });
         const data = {
-            username: username,
+            email: email,
             password: password
         };
 
-        fetch('', {
+        fetch('http://localhost:8080/api/login', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
@@ -29,6 +52,7 @@ function InicioSesion() {
             .then(response => response.json())
             .then(result => {
                 console.log(result)
+                alert("poeema");
             })
             .catch(error =>{
                 console.log(error)
@@ -46,12 +70,13 @@ function InicioSesion() {
                             <div className="card-body p-5 shadow-5 text-center">
                                 <h2 className="fw-bold mb-5">Inicio de sesión</h2>
                                 <form>
-                                    <div className="form-outline mb-4">
-                                        <input type="text" id="form3Example3" onChange={(event)=>{setUsername(event.target.value)}} className="form-control text-center fw-bold" placeholder="Nombre de usuario"/>
+                                    <div className="form-outline mb-4"> {/*onChange={(event)=>{setUsername(event.target.value)}}*/}
+                                        <input type="text" id="form3Example3" onChange={(event)=>{setEmail(event.target.value)}} className="form-control text-center fw-bold" placeholder="Nombre de usuario"/>
                                     </div>
-                                    <div className="form-outline mb-4">
-                                        <input type="password" id="form3Example4" onChange={(event)=>{setPassword(event.target.value)}} className="form-control text-center fw-bold" placeholder="Contraseña"/>
-                                    </div>
+                                    <div className="form-outline mb-4"> {/*onChange={(event)=>{setPassword(event.target.value)}}*/}
+                                        <input type="password" id="form3Example4" onChange={(event)=>{setPassword(event.target.value)}}  className="form-control text-center fw-bold" placeholder="Contraseña"/>
+                                                                                    {/*onChange={(event=>{this.setState({password:event.target.value})})} */}
+                                    </div>                                      {/*onClick={handdleLogin}*/}
                                     <button type="submit" className="btnVerMas mb-4 mt-4" onClick={handdleLogin}>Iniciar ya!!!</button>
                                     <div className="text-center mt-4">
                                         <Link to="/registro">Registrate</Link>    

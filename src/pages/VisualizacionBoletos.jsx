@@ -13,46 +13,52 @@ function VisualizacionBoletos() {
                             <div className="d-flex justify-content-between">
                                 <img src={IconoBlancoBoleto}></img>
                                 <div className="text-center m-5">
-                                    <div className="text-light text-center">
+                                    <div className="text-light text-center fs-5">
                                         Gran Cafe | Tuxtla Gutierrez, chiapas
                                     </div>
-                                    <div className="text-light text-center">
+                                    <div className="barraBlanca">-</div>
+                                    <div className="text-light text-center fs-1">
                                         café concert
                                     </div>
+                                    <div className="barraBlancaGrande">-</div>
                                     <div className="d-flex justify-content-around text-light text-center">
-                                        <div>
+                                        <div className="fs-2">
                                             Lugar:
                                         </div>
-                                        <div>
+                                        <div className="fs-5 w-50">
                                             Estadio panchon contreras tuxtla gutierrez, chiapas
                                         </div>
                                     </div>
+                                    <div className="barraBlanca">-</div>
                                     <div className="d-flex justify-content-around text-light text-center">
-                                        <div>
+                                        <div className="fs-2">
                                             Fecha:
                                         </div>
-                                        <div>
+                                        <div className="fs-5">
                                             Estadio panchon contreras tuxtla gutierrez, chiapas
                                         </div>
                                     </div>
+                                    <div className="barraBlanca">-</div>
                                     <div className="d-flex justify-content-around text-light text-center">
-                                        <div>
+                                        <div className="fs-2">
                                             Hora:
                                         </div>
-                                        <div>
+                                        <div className="fs-5">
                                             Estadio panchon contreras tuxtla gutierrez, chiapas
                                         </div>
                                     </div>
+                                    <div className="barraBlanca">-</div>
                                     <div className="d-flex justify-content-around text-light text-center">
-                                        <div className="">
+                                        <div className="fs-2 m-3">
                                             Localidad:
                                         </div>
                                         <div>
-                                            <div>Vip</div>
-                                            <div>Preferente</div>
-                                            <div>General</div>
+                                            <div className="fs-5">Vip</div>
+                                            <div className="fs-5">Preferente</div>
+                                            <div className="fs-5">General</div>
                                         </div>
                                     </div>
+                                    <div className="barraBlancaGrande">-</div>
                                     <button type="submit" className="btnVerMas mb-4 mt-4">Comprar boleto</button>
                                 </div>
                                 <img className="rotaciónBoleto" src={IconoBlancoBoleto}></img>

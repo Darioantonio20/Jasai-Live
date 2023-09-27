@@ -200,4 +200,18 @@
 .rotaciónBoleto{
     transform: rotate(180deg);
 }
+.barraBlanca{
+    background-color: #ffffff;
+    height: 0.5vh;
+    text-align: center;
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+}
+.barraBlancaGrande{
+    background-color: #ffffff;
+    height: 3vh;
+    text-align: center;
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+}
 /*-----------------*/

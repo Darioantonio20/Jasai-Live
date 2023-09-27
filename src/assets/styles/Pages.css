@@ -192,7 +192,12 @@
 /*-----------------*/
 
 /*-----------------*/
-
-
-
+.colorBoleto{
+    height: 100%;
+    width: 100%;
+    background-color: #171717;
+}
+.rotaciónBoleto{
+    transform: rotate(180deg);
+}
 /*-----------------*/

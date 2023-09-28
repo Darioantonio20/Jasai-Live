@@ -1,5 +1,4 @@
 import NavBar from "../components/atoms/NavBar";
-import BoletoInfo from "../components/molecules/Boletoinfo";
 import IconoBlancoBoleto from "../assets/img/formaboletoBlanco.svg";
 
 function VisualizacionBoletos() {
@@ -77,7 +76,6 @@ function VisualizacionBoletos() {
                     </div>
                 </div>
             </div>
-            <BoletoInfo/>
         </>
      );
 }

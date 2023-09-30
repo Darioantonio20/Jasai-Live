@@ -1,32 +1,10 @@
 import { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import { useForm } from "react-hook-form";
 import NavBar from "../components/atoms/NavBar";
 import ImgLoginRegisterFondo from "../assets/img/imgLoginRegister.png";
 
 function InicioSesion() {
-
-    {/*constructor(){
-        super()
-        this.state={
-            email:null,
-            password:null,
-        }
-    }
-    login=()=>{
-        axios.post('http://localhost:8080/api/login',response);
-
-    }*/}
-
-    //fetch('http://localhost:8080/api/login',{
-        //method:'POST',
-        //headers:{'Content-Type':'aplication/json'},
-        //body:JSON.stringify(data)
-        //}).then(
-          //  response=>response.json()
-      //  ).then(
-        //    data=>{alert(data)}
-        //)
-    
 
     const [password, setPassword] = useState();
     const [email, setEmail] = useState();
@@ -37,7 +15,7 @@ function InicioSesion() {
             email: email,
             password: password
         });
-        const data = {
+        const datitos = {
             email: email,
             password: password
         };
@@ -47,7 +25,7 @@ function InicioSesion() {
             headers: {
                 'Content-Type': 'application/json'
             },
-            body: JSON.stringify(data)
+            body: JSON.stringify(datitos)
         })
             .then(response => response.json())
             .then(result => {
@@ -56,7 +34,15 @@ function InicioSesion() {
             })
             .catch(error =>{
                 console.log(error)
-            })
+            })
+    }
+
+    const { register, handleSubmit } = useForm();
+    const navigate = useNavigate();
+    const onSubmit = (datitos) => {
+        console.log(datitos);
+        localStorage.setItem('user', JSON.stringify(datitos));
+        navigate('/compraBoletos');
     }
 
     return ( 
@@ -69,15 +55,14 @@ function InicioSesion() {
                         <div className="card cascading-right estiloCard">
                             <div className="card-body p-5 shadow-5 text-center">
                                 <h2 className="fw-bold mb-5">Inicio de sesión</h2>
-                                <form>
+                                <form onSubmit={handleSubmit(onSubmit)}>
                                     <div className="form-outline mb-4"> {/*onChange={(event)=>{setUsername(event.target.value)}}*/}
-                                        <input type="text" id="form3Example3" onChange={(event)=>{setEmail(event.target.value)}} className="form-control text-center fw-bold" placeholder="Nombre de usuario"/>
+                                        <input type="text" id="form3Example3" {...register('email')} onChange={(event)=>{setEmail(event.target.value)}} className="form-control text-center fw-bold" placeholder="Nombre de usuario"/>
                                     </div>
                                     <div className="form-outline mb-4"> {/*onChange={(event)=>{setPassword(event.target.value)}}*/}
-                                        <input type="password" id="form3Example4" onChange={(event)=>{setPassword(event.target.value)}}  className="form-control text-center fw-bold" placeholder="Contraseña"/>
-                                                                                    {/*onChange={(event=>{this.setState({password:event.target.value})})} */}
-                                    </div>                                      {/*onClick={handdleLogin}*/}
-                                    <button type="submit" className="btnVerMas mb-4 mt-4" onClick={handdleLogin}>Iniciar ya!!!</button>
+                                        <input type="password" id="form3Example4" {...register('password')} onChange={(event)=>{setPassword(event.target.value)}} className="form-control text-center fw-bold" placeholder="Contraseña"/>                                            
+                                    </div>                                      
+                                    <button type="submit" value="Enviar" onClick={handdleLogin} className="btnVerMas mb-4 mt-4">Iniciar ya!!!</button>
                                     <div className="text-center mt-4">
                                         <Link to="/registro">Registrate</Link>    
                                     </div>

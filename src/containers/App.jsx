@@ -5,8 +5,12 @@ import Registro from '../pages/Registro';
 import VisualizacionBoletos from '../pages/VisualizacionBoletos';
 import CompraBoletos from '../pages/CompraBoletos';
 import '../assets/styles/App.css';
+import ProtectedRoute from '../utils/ProtectedRoute';
+import { useLocalStorage } from 'react-use';
 
 function App() {
+
+  const [user, setUser] = useLocalStorage('user');
 
   return (
     <>
@@ -16,7 +20,9 @@ function App() {
           <Route path="/inicioSesion" element={<InicioSesion/>}/>
           <Route path="/registro" element={<Registro/>}/>
           <Route path="/visualizacionBoletos" element={<VisualizacionBoletos/>}/>
-          <Route path="/compraBoletos" element={<CompraBoletos/>}/>
+          <Route element={<ProtectedRoute canActivate={user}/>}>
+            <Route path="/compraBoletos" element={<CompraBoletos/>}/>
+          </Route>
         </Routes>
       </BrowserRouter>
     </>

@@ -52,7 +52,7 @@ function Section4() {
             </div>
             <div className="d-flex justify-content-center m-5">
                 <Link to="/visualizacionBoletos">
-                    <button type="button" className="btnVerMas">Ver más</button>
+                    <button type="button" className="btnVerMas">Ver más </button>
                 </Link>
             </div>
         </div>

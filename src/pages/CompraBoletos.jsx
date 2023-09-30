@@ -4,6 +4,15 @@ import IconoBlancoBoleto from "../assets/img/formaboletoBlanco.svg";
 import IconoSection2 from "../assets/img/iconoSection2.png";
 
 function CompraBoletos() {
+
+    const mostrarAlerta=()=>{
+        Swal.fire(
+            'Pago Exitoso',
+            'su compra ha sido realizada con éxito, descargue su boleto en pdf si lo desea',
+            'success'
+          )
+    }
+
     return ( 
         <>
             <NavBar/>
@@ -29,6 +38,7 @@ function CompraBoletos() {
                         </div>
                     </div>
                 </div>
+                <button onClick={()=>mostrarAlerta()}>mostrar</button>
             </div>
             <Footer/>
         </>

@@ -8,7 +8,7 @@ function CompraBoletos() {
         <>
             <NavBar/>
             <div className="row d-flex">
-                <div className="col-sm-12 col-md-3 col-xl-3 d-flex justify-content-md-end justify-content-sm-center">
+                <div className="col-sm-12 col-md-3 col-xl-3 d-flex">
                     <div class="cardcita">
                         <img width={150} src={IconoSection2}></img>
                         <div class="card__content">

@@ -5,9 +5,14 @@ import IconoNext from "../../assets/img/iconoNext.png";
 import IconoPreview from "../../assets/img/iconoPreview.png";
 import "../../assets/styles/Pages.css";
 
+
 function Section4() {
+
     return ( 
         <>
+        <div>
+            
+        </div>
         <div id="carouselExample" className="carousel slide">
             <div className="carousel-inner">
                 <div className="container-fluid align">

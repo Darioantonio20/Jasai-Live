@@ -1,41 +1,10 @@
-import { useState } from "react";
+
 import { Link, useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import NavBar from "../components/atoms/NavBar";
 import ImgLoginRegisterFondo from "../assets/img/imgLoginRegister.png";
 
 function InicioSesion() {
-
-    const [password, setPassword] = useState();
-    const [email, setEmail] = useState();
-
-    const handdleLogin = (e) =>{
-        e.preventDefault();
-        console.log({
-            email: email,
-            password: password
-        });
-        const datitos = {
-            email: email,
-            password: password
-        };
-
-        fetch('http://localhost:8080/api/login', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify(datitos)
-        })
-            .then(response => response.json())
-            .then(result => {
-                console.log(result)
-                alert("poeema");
-            })
-            .catch(error =>{
-                console.log(error)
-            })
-    }
 
     const { register, handleSubmit } = useForm();
     const navigate = useNavigate();
@@ -57,12 +26,12 @@ function InicioSesion() {
                                 <h2 className="fw-bold mb-5">Inicio de sesión</h2>
                                 <form onSubmit={handleSubmit(onSubmit)}>
                                     <div className="form-outline mb-4"> {/*onChange={(event)=>{setUsername(event.target.value)}}*/}
-                                        <input type="text" id="form3Example3" {...register('email')} onChange={(event)=>{setEmail(event.target.value)}} className="form-control text-center fw-bold" placeholder="Nombre de usuario"/>
+                                        <input type="text" id="form3Example3" {...register('email')} className="form-control text-center fw-bold" placeholder="Nombre de usuario"/>
                                     </div>
                                     <div className="form-outline mb-4"> {/*onChange={(event)=>{setPassword(event.target.value)}}*/}
-                                        <input type="password" id="form3Example4" {...register('password')} onChange={(event)=>{setPassword(event.target.value)}} className="form-control text-center fw-bold" placeholder="Contraseña"/>                                            
+                                        <input type="password" id="form3Example4" {...register('password')} className="form-control text-center fw-bold" placeholder="Contraseña"/>                                            
                                     </div>                                      
-                                    <button type="submit" value="Enviar" onClick={handdleLogin} className="btnVerMas mb-4 mt-4">Iniciar ya!!!</button>
+                                    <button type="submit" value="Enviar" className="btnVerMas mb-4 mt-4">Iniciar ya!!!</button>
                                     <div className="text-center mt-4">
                                         <Link to="/registro">Registrate</Link>    
                                     </div>

@@ -18,13 +18,13 @@ function CompraBoletos() {
             <NavBar/>
             <div className="row d-flex">
                 <div className="col-sm-12 col-md-3 col-xl-3 d-flex">
-                    <div class="cardcita">
+                    <div className="cardcita">
                         <img width={150} src={IconoSection2}></img>
-                        <div class="card__content">
-                            <p class="fs-1 text-center text-white mb-5">Precio</p>
-                            <p class="fs-4 text-white">Vip: {/*Adjuntar el precio*/}</p>
-                            <p class="fs-4 text-white">Preferente: {/*Adjuntar el precio*/}</p>
-                            <p class="fs-4 text-white">General: {/*Adjuntar el precio*/}</p>
+                        <div className="card__content">
+                            <p className="fs-1 text-center text-white mb-5">Precio</p>
+                            <p className="fs-4 text-white">Vip: {/*Adjuntar el precio*/}</p>
+                            <p className="fs-4 text-white">Preferente: {/*Adjuntar el precio*/}</p>
+                            <p className="fs-4 text-white">General: {/*Adjuntar el precio*/}</p>
                         </div>
                     </div>
                 </div>

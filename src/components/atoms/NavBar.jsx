@@ -1,7 +1,15 @@
 import { Link } from "react-router-dom";
+import { useContext,useEffect } from "react";
+import ContextoDeUsuario from "../../context/ContextoDeUsuario";
 import ImgJasaiLogo from "../../assets/img/jasaiLogo.png";
 
 function NavBar() {
+
+    const { userContext, setUserContext} = useContext(ContextoDeUsuario);
+    useEffect(() => {
+        console.log(userContext, "este es el useeffectcito");
+    }, [userContext])
+
     return ( 
         <>
         <div className="pt-2 pb-1 bg-black">
@@ -23,15 +31,24 @@ function NavBar() {
                         <li className="nav-item m-2">
                             <Link to="/visualizacionBoletos" className="nav-link" href="#">Eventos</Link>
                         </li>
-                        <li className="nav-item m-2">
-                            <Link to="/compraBoletos" className="nav-link" href="#">Compra de boletos</Link>
-                        </li>
+                        {userContext == "" ? 
+                        (<></>):(
+                            <li className="nav-item m-2">
+                                <Link to="/compraBoletos" className="nav-link" href="#">Compra de boletos</Link>
+                            </li>
+                        )}
                         <li className="nav-item m-2">
                             <Link to="/" className="nav-link" href="#">Sobre nosotros</Link>
                         </li>
                         <li className="nav-item m-2">
-                            <Link to="/inicioSesion" className="nav-link" href="#">Mi cuenta</Link>
+                            <Link to="/inicioSesion" className="nav-link" href="#">Inicio de sesión</Link>
                         </li>
+                        {userContext == "" ? 
+                        (<></>):(
+                            <li className="nav-item m-2">
+                                <Link to="/miCuenta" className="nav-link" href="#">Mi cuenta</Link>
+                            </li>
+                        )}
                     </ul>
                 </div>
             </div>

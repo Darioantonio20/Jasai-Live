@@ -1,19 +1,41 @@
 
 import { Link, useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
+import { useContext } from "react";
+import ContextoDeUsuario from '../context/ContextoDeUsuario';
 import NavBar from "../components/atoms/NavBar";
 import ImgLoginRegisterFondo from "../assets/img/imgLoginRegister.png";
 
 function InicioSesion() {
 
+    const { userContext, setUserContext} = useContext(ContextoDeUsuario);
+
     const { register, handleSubmit } = useForm();
     const navigate = useNavigate();
     const onSubmit = (datitos) => {
         console.log(datitos);
+        setUserContext(datitos)
         localStorage.setItem('user', JSON.stringify(datitos));
-        navigate('/compraBoletos');
+        const url = `localhost:3000/Usuarios/${datitos.email}/${datitos.password}`
+        console.log(url);
+        navigate('/visualizacionBoletos');
+        
+        {/*fetch(url)
+        .then((response) => {
+            if (response.status === 200) {
+                navigate('/visualizacionBoletos');
+            }
+            return response.json();
+        })
+        .then((data) => {
+            console.log('Login response:', data);
+        })
+        .catch((error) => {
+            console.error('Error:', error);
+        });*/}
+    
     }
-
+   
     return ( 
         <>
         <NavBar/>        

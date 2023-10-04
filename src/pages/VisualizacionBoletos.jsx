@@ -1,11 +1,38 @@
 import NavBar from "../components/atoms/NavBar";
+import { useContext,useEffect } from "react";
+import ContextoDeUsuario from "../context/ContextoDeUsuario";
 import IconoBlancoBoleto from "../assets/img/formaboletoBlanco.svg";
 
 function VisualizacionBoletos() {
+    const data = [{id:1},{id:2},{id:3}] 
+    const { userContext, setUserContext} = useContext(ContextoDeUsuario);
+    useEffect(() => {
+        console.log(userContext, "este es boton de ver boleto");
+    }, [userContext])
+
+    const compraDeBoletos = () =>{
+        console.log("lo que sea");
+       if(useContext== ""){ Swal.fire(
+            'Good job!',
+            'You clicked the button!',
+            'success'
+          ) 
+       }else{Swal.fire(
+            'bad job',
+            'ñahhh',
+            'success'
+          ) }
+}
+
     return ( 
         <>
            <NavBar/>
             <div className="row d-flex">
+            {data.map((index)=>{
+                return <></>
+                {console.log(index)} 
+                <><h1>peneee {index}</h1><p>hola {index}</p></>
+            })}
                 <div className="col-sm-12 col-md-6 col-xl-6 d-flex justify-content-md-end justify-content-sm-center">
                     <div className="col-sm-12 col-md-6 col-xl-6 colorBoleto">
                         <div>
@@ -58,7 +85,9 @@ function VisualizacionBoletos() {
                                         </div>
                                     </div>
                                     <div className="barraBlancaGrande">-</div>
-                                    <button type="submit" className="btnVerMas mb-4 mt-4">Comprar boleto</button>
+
+                                    <button type="submit" onClick={()=>compraDeBoletos()} className="btnVerMas mb-4 mt-4">Comprar boleto</button>
+
                                 </div>
                                 <img className="rotaciónBoleto" src={IconoBlancoBoleto}></img>
                             </div>

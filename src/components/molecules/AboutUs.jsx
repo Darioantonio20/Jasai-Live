@@ -1,6 +1,7 @@
 import DarioFoto from "../../assets/img/darioFoto.png";
 import DavidFoto from "../../assets/img/imgLicCarlos.png";
 import CarlosFoto from "../../assets/img/imgLicDavid.png";
+import ElMasTalentoso from "../../assets/img/elMasTalentoso.png"
 import "../../assets/styles/Pages.css";
 
 function AboutUs() {
@@ -29,6 +30,14 @@ function AboutUs() {
       facebookLink: 'https://www.facebook.com/dario.gutierrezalvares/',
       githubLink: 'https://github.com/Darioantonio20',
       linkedinLink: 'https://www.linkedin.com/in/dario-antonio-gutierrez-alvarez-41353a225/'
+    },
+    {
+      nombre: 'Chat GPT',
+      puesto: 'Scrum Team & Product Owner',
+      foto: `${ElMasTalentoso}`,
+      facebookLink: 'https://chat.openai.com/',
+      githubLink: 'https://chat.openai.com/',
+      linkedinLink: 'https://chat.openai.com/'
     }
   ];
 
@@ -37,7 +46,7 @@ function AboutUs() {
       <h4 className="font-weight-bold text-center mb-5 mt-5">Equipo de desarrollo</h4>
       <div className="row">
         {personas.map((persona, index) => (
-          <div className="col-md-4 d-flex justify-content-center" key={index}>
+          <div className="col-md-3 d-flex justify-content-center" key={index}>
             <div className="cardAbout">
               <div className="cardAbout-photo">
                 <img className="imgCardcitas" src={persona.foto} alt={persona.nombre} />

@@ -38,9 +38,6 @@ function NavBar() {
                             </li>
                         )}
                         <li className="nav-item m-2">
-                            <Link to="/" className="nav-link" href="#">Sobre nosotros</Link>
-                        </li>
-                        <li className="nav-item m-2">
                             <Link to="/inicioSesion" className="nav-link" href="#">Inicio de sesión</Link>
                         </li>
                         {userContext == "" ? 

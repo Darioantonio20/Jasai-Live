@@ -608,3 +608,100 @@
   filter: blur(10px);
   transform: scale(0.9, 0.9);
 }
+
+/* before adding the photo to the div with the "card-photo" class, in the css clear the styles for .card-photo and remove .card-photo::before and .card-photo::after, then set the desired styles for .card- photo. */
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+.cardAbout {
+  --font-color: #323232;
+  --font-color-sub: #666;
+  --bg-color: #fff;
+  --main-color: #323232;
+  width: 200px;
+  height: 254px;
+  background: var(--bg-color);
+  border: 2px solid var(--main-color);
+  box-shadow: 4px 4px var(--main-color);
+  border-radius: 5px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.cardAbout-photo {
+/* clear and add new css */
+  transform: scale(0.3) translate(220px, 230px);
+  width: 100%;
+  height: 100%;
+  margin-left: -125px;
+  margin-top: -125px;
+  border-radius: 30%;
+}
+
+.imgCardcitas{
+  border-radius: 100%;
+}
+
+.cardAbout-title {
+  text-align: center;
+  color: var(--font-color);
+  font-size: 20px;
+  font-weight: 400;
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+}
+
+.cardAbout-title span {
+  font-size: 15px;
+  color: var(--font-color-sub);
+}
+
+.cardAbout-socials {
+  display: flex;
+  height: 0;
+  opacity: 0;
+  margin-top: 20px;
+  gap: 20px;
+  transition: 0.5s;
+}
+
+.cardAbout-socials-btn {
+  width: 25px;
+  height: 25px;
+  border: none;
+  background: transparent;
+  cursor: pointer;
+}
+
+.cardAbout-socials-btn svg {
+  width: 100%;
+  height: 100%;
+  fill: var(--main-color);
+}
+
+.cardAbout:hover > .cardAbout-socials {
+  opacity: 1;
+  height: 35px;
+}
+
+.cardAbout-socials-btn:hover {
+  transform: translateY(-5px);
+  transition: all 0.15s;
+}
+
+.cardAbout-photo:hover {
+  transition: 0.3s;
+  transform: scale(0.4) translate(160px, 150px);
+}

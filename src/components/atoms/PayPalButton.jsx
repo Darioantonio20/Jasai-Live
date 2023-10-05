@@ -37,7 +37,11 @@ function PayPalButton() {
                     });
                 },
                 onCancel: function (data) {
-                    alert('Pago cancelado');
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'Compra cancelada',
+                        text: 'Asegurece que en la compra sea lo que usted desee',
+                      })
                     console.log(data);
                 },
             })

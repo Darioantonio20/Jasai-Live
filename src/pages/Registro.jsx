@@ -98,7 +98,7 @@ function Registro() {
                                                 ref={nameRef}
                                                 id="form3Example3"
                                                 className="form-control text-center fw-bold"
-                                                placeholder="Nombre de usuario"
+                                                placeholder="Nombre"
                                             />
                                         </div>
                                         <div className="form-outline mb-4">

@@ -1,74 +1,61 @@
-
-import { Link, useNavigate } from "react-router-dom";
-import { useForm } from "react-hook-form";
-import { useContext } from "react";
-import ContextoDeUsuario from '../context/ContextoDeUsuario';
-import NavBar from "../components/atoms/NavBar";
+import React, { useState } from 'react';
+import { Link } from 'react-router-dom';
+import Swal from 'sweetalert2';
 import ImgLoginRegisterFondo from "../assets/img/imgLoginRegister.png";
+import NavBar from '../components/atoms/NavBar';
 
-function InicioSesion() {
-    
-    const [password, setPassword] = useState();
-    const [email, setEmail] = useState();
-    const { userContext, setUserContext} = useContext(ContextoDeUsuario);
+const Login = () => {
+    const [correo, setCorreo] = useState('');
+    const [contrasena, setContrasena] = useState('');
 
-    const handdleLogin = (e) => {
-        e.preventDefault();
-        console.log({
-            email: email,
-            password: password
-        });
-        const datitos = {
-            email: email,
-            password: password
-        };
+    const handleLogin = async () => {
+        try {
 
-        fetch('http://localhost:8080/api/login', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify(datitos)
-        })
-            .then(response => response.json())
-            .then(result => {
-                console.log(result)
-                alert("poeema");
-            })
-            .catch(error => {
-                console.log(error)
-            })
-    }
+            const response = await fetch('http://127.0.0.1:3000/usuarios');
+            const usuarios = await response.json();
+            const usuario = usuarios.find((u) => u.correo === correo);
 
-    const { register, handleSubmit } = useForm();
-    const navigate = useNavigate();
-    const onSubmit = (datitos) => {
-        console.log(datitos);
-        setUserContext(datitos)
-        localStorage.setItem('user', JSON.stringify(datitos));
-        const url = `localhost:3000/Usuarios/${datitos.email}/${datitos.password}`
-        console.log(url);
-        navigate('/visualizacionBoletos');
-        
-        {/*fetch(url)
-        .then((response) => {
-            if (response.status === 200) {
-                navigate('/visualizacionBoletos');
+            if (usuario) {
+                if (usuario.contrasena === contrasena) {
+                    console.log('Inicio de sesión exitoso');
+                    console.log('Datos del usuario:', usuario);
+
+                    Swal.fire({
+                        icon: 'success',
+                        title: 'Inicio de sesión exitoso',
+                        text: '¡Bienvenido!',
+                    });
+                } else {
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'Contraseña incorrecta',
+                        text: 'Por favor, verifica tu contraseña.',
+                    });
+                }
+            } else {
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Correo no encontrado',
+                    text: 'Por favor, verifica tu correo electrónico.',
+                });
             }
-            return response.json();
-        })
-        .then((data) => {
-            console.log('Login response:', data);
-        })
-        .catch((error) => {
-            console.error('Error:', error);
-        });*/}
-    
-    }
+        } catch (err) {
+            Swal.fire({
+                icon: 'error',
+                title: 'Error al iniciar sesión',
+                text: 'Verifica tu conexión y vuelve a intentarlo.',
+            });
+        }
+    };
+
+    const handleSubmit = (e) => {
+        e.preventDefault();
+        handleLogin();
+    };
 
     return (
         <>
-            <NavBar />
+        <NavBar/>
             <section className="text-center text-lg-start">
                 <div className="container py-4">
                     <div className="row g-0 align-items-center">
@@ -76,29 +63,45 @@ function InicioSesion() {
                             <div className="card cascading-right estiloCard">
                                 <div className="card-body p-5 shadow-5 text-center">
                                     <h2 className="fw-bold mb-5">Inicio de sesión</h2>
-                                    <form onSubmit={handleSubmit(onSubmit)}>
-                                        <div className="form-outline mb-4"> {/*onChange={(event)=>{setUsername(event.target.value)}}*/}
-                                            <input type="text" id="form3Example3" {...register('email')} onChange={(event) => { setEmail(event.target.value) }} className="form-control text-center fw-bold" placeholder="Nombre de usuario" />
+                                    <form onSubmit={handleSubmit}>
+                                        <div className="form-outline mb-4">
+                                            <input
+                                                type="text"
+                                                id="form3Example3"
+                                                value={correo}
+                                                onChange={(e) => setCorreo(e.target.value)}
+                                                className="form-control text-center fw-bold"
+                                                placeholder="Correo electrónico"
+                                            />
                                         </div>
-                                        <div className="form-outline mb-4"> {/*onChange={(event)=>{setPassword(event.target.value)}}*/}
-                                            <input type="password" id="form3Example4" {...register('password')} onChange={(event) => { setPassword(event.target.value) }} className="form-control text-center fw-bold" placeholder="Contraseña" />
+                                        <div className="form-outline mb-4">
+                                            <input
+                                                type="password"
+                                                id="form3Example4"
+                                                value={contrasena}
+                                                onChange={(e) => setContrasena(e.target.value)}
+                                                className="form-control text-center fw-bold"
+                                                placeholder="Contraseña"
+                                            />
                                         </div>
-                                        <button type="submit" value="Enviar" onClick={handdleLogin} className="btnVerMas mb-4 mt-4">Iniciar ya!!!</button>
+                                        <button type="submit" className="btnVerMas mb-4 mt-4">
+                                            Iniciar sesión
+                                        </button>
                                         <div className="text-center mt-4">
-                                            <Link to="/registro">Registrate</Link>
+                                            <Link to="/registro">Regístrate</Link>
                                         </div>
                                     </form>
                                 </div>
                             </div>
                         </div>
                         <div className="col-lg-6 mb-5 mb-lg-0">
-                            <img src={ImgLoginRegisterFondo} className="w-100 rounded-4 shadow-4" />
+                        <img src={ImgLoginRegisterFondo} className="w-100 rounded-4 shadow-4" />
                         </div>
                     </div>
                 </div>
             </section>
         </>
     );
-}
+};
 
-export default InicioSesion;
+export default Login;

@@ -9,6 +9,8 @@ import CompraBoletos from '../pages/CompraBoletos';
 import ProtectedRoute from '../utils/ProtectedRoute';
 import ContextoDeUsuario from '../context/ContextoDeUsuario';
 import MiCuenta from '../pages/MiCuenta';
+import CuentaUsuario from '../pages/CuentaUsuario';
+import CuentaAdmin from '../pages/CuentaAdmin';
 import '../assets/styles/App.css';
 
 function App() {
@@ -28,6 +30,8 @@ function App() {
               <Route path="/compraBoletos" element={<CompraBoletos/>}/>
             </Route>
             <Route path="/miCuenta" element={<MiCuenta/>}/>
+            <Route path="/usuario" element={<CuentaUsuario/>}/>
+            <Route path="/admin" element={<CuentaAdmin/>}/>
           </Routes>
         </BrowserRouter>
       </ContextoDeUsuario.Provider>

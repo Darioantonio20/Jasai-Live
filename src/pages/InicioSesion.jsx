@@ -1,49 +1,61 @@
 import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { useNavigate, Link } from 'react-router-dom';
 import Swal from 'sweetalert2';
 import ImgLoginRegisterFondo from "../assets/img/imgLoginRegister.png";
-import NavBar from '../components/atoms/NavBar';
 
-const Login = () => {
+const InicioSesion = () => {
     const [correo, setCorreo] = useState('');
     const [contrasena, setContrasena] = useState('');
+    const navigate = useNavigate();
 
-    const handleLogin = async () => {
-        try {
+    const handleLogin = () => {
+        const usuarios = [
+            {
+                correo: 'usuario@example.com',
+                contrasena: 'contrasenaUsuario',
+                tipo: 'usuario',
+            },
+            {
+                correo: 'admin@example.com',
+                contrasena: 'contrasenaAdmin',
+                tipo: 'admin',
+            },
+        ];
 
-            const response = await fetch('http://127.0.0.1:3000/usuarios');
-            const usuarios = await response.json();
-            const usuario = usuarios.find((u) => u.correo === correo);
+        const usuario = usuarios.find((u) => u.correo === correo);
 
-            if (usuario) {
-                if (usuario.contrasena === contrasena) {
-                    console.log('Inicio de sesión exitoso');
-                    console.log('Datos del usuario:', usuario);
+        if (usuario) {
+            if (usuario.contrasena === contrasena) {
+                console.log('Inicio de sesión exitoso');
+                console.log('Datos del usuario:', usuario);
 
-                    Swal.fire({
-                        icon: 'success',
-                        title: 'Inicio de sesión exitoso',
-                        text: '¡Bienvenido!',
-                    });
+                if (usuario.tipo === 'admin') {
+                 
+                    console.log("admin");
+                    navigate('/admin');
                 } else {
-                    Swal.fire({
-                        icon: 'error',
-                        title: 'Contraseña incorrecta',
-                        text: 'Por favor, verifica tu contraseña.',
-                    });
+                    
+                    console.log("usuario");
+                    navigate('/usuario');
                 }
+
+                Swal.fire({
+                    icon: 'success',
+                    title: 'Inicio de sesión exitoso',
+                    text: '¡Bienvenido!',
+                });
             } else {
                 Swal.fire({
                     icon: 'error',
-                    title: 'Correo no encontrado',
-                    text: 'Por favor, verifica tu correo electrónico.',
+                    title: 'Contraseña incorrecta',
+                    text: 'Por favor, verifica tu contraseña.',
                 });
             }
-        } catch (err) {
+        } else {
             Swal.fire({
                 icon: 'error',
-                title: 'Error al iniciar sesión',
-                text: 'Verifica tu conexión y vuelve a intentarlo.',
+                title: 'Correo no encontrado',
+                text: 'Por favor, verifica tu correo electrónico.',
             });
         }
     };
@@ -55,7 +67,6 @@ const Login = () => {
 
     return (
         <>
-        <NavBar/>
             <section className="text-center text-lg-start">
                 <div className="container py-4">
                     <div className="row g-0 align-items-center">
@@ -88,14 +99,14 @@ const Login = () => {
                                             Iniciar sesión
                                         </button>
                                         <div className="text-center mt-4">
-                                            <Link to="/registro">Regístrate</Link>
+                                            <Link to="/registro">Regístrate</Link> 
                                         </div>
                                     </form>
                                 </div>
                             </div>
                         </div>
                         <div className="col-lg-6 mb-5 mb-lg-0">
-                        <img src={ImgLoginRegisterFondo} className="w-100 rounded-4 shadow-4" />
+                            <img src={ImgLoginRegisterFondo} className="w-100 rounded-4 shadow-4" alt="Fondo" />
                         </div>
                     </div>
                 </div>
@@ -104,4 +115,4 @@ const Login = () => {
     );
 };
 
-export default Login;
+export default InicioSesion;

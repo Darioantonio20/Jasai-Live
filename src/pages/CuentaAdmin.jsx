@@ -1,7 +1,10 @@
+import NavBar from "../components/atoms/NavBar";
+
 function CuentaAdmin() {
     return (
         <>
-            hola admin
+            <NavBar/>
+            hola Admin
         </>
     );
 }

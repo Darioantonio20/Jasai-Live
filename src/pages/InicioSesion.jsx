@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
 import Swal from 'sweetalert2';
 import ImgLoginRegisterFondo from "../assets/img/imgLoginRegister.png";
+import NavBar from "../components/atoms/NavBar";
 
 const InicioSesion = () => {
     const [correo, setCorreo] = useState('');
@@ -67,6 +68,7 @@ const InicioSesion = () => {
 
     return (
         <>
+            <NavBar/>
             <section className="text-center text-lg-start">
                 <div className="container py-4">
                     <div className="row g-0 align-items-center">

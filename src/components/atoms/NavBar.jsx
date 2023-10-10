@@ -31,7 +31,8 @@ function NavBar() {
                         <li className="nav-item m-2">
                             <Link to="/visualizacionBoletos" className="nav-link" href="#">Eventos</Link>
                         </li>
-                        {userContext == "" ? 
+                        {userContext == ""  ?
+                        //si es objeto y si userContex.tipo=="Usuario" 
                         (<></>):(
                             <li className="nav-item m-2">
                                 <Link to="/compraBoletos" className="nav-link" href="#">Compra de boletos</Link>

@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from 'react';
 import ReactApexChart from 'react-apexcharts';
-import "../../assets/styles/Chart.css";
 
 function Chart() {
   const [chartData, setChartData] = useState({

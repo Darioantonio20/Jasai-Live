@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import ReactApexChart from 'react-apexcharts';
+import "../../assets/styles/Chart.css";
 
 function Chart() {
   const [chartData, setChartData] = useState({
@@ -35,13 +36,52 @@ function Chart() {
   }, []);
 
   return (
-    <div id="chart">
-      <ReactApexChart
-        options={chartData.options}
-        series={chartData.series}
-        type="polarArea"
-      />
+    <>
+    <div className='row'>
+      <div class="col-6 mt-5">
+        <div class="card text-center">
+          <div class="card-header">
+            Grafica de pastel
+          </div>
+          <div class="card-body">
+            <h5 class="card-title"></h5>
+            <div className="text-center">
+              <div id="chart">
+                <ReactApexChart
+                  options={chartData.options}
+                  series={chartData.series}
+                  type="polarArea"
+                />
+              </div>
+            </div>
+          </div>
+          <div class="card-footer text-body-secondary">
+          Datos del afore del concierto
+          </div>
+        </div>
+      </div>
+      <div class="col-6 mt-5">
+        <div class="card text-center">
+          <div class="card-header">
+            Datos Obtenidos
+          </div>
+          <div class="card-body">
+            <h5 class="card-title"></h5>
+            <div className="text-center">
+              Datos
+            </div>
+          </div>
+          <div class="card-footer text-body-secondary">
+      
+          </div>
+        </div>
+      </div>
     </div>
+    
+
+     
+    
+    </>
   );
 }
 

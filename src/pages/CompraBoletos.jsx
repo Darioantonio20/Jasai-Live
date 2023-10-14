@@ -27,9 +27,9 @@ function CompraBoletos() {
                                             <option value="4">Jasai-Live</option>
                                         </select>
                                     <label className="fs-3 text-center text-white mt-5 mb-4">Nombre Completo</label>
-                                    <input class="form-control form-control-lg text-center" type="text"/>
+                                    <input className="form-control form-control-lg text-center" type="text"/>
                                     <label className="fs-3 text-center text-white mt-5 mb-4">Número De Teléfono</label>
-                                    <input class="form-control form-control-lg text-center" type="number"/>
+                                    <input className="form-control form-control-lg text-center" type="number"/>
                                     </form>
                                 </div>
                                 <img className="rotaciónBoleto" src={IconoBlancoBoleto} alt="Icono"></img>
@@ -38,12 +38,12 @@ function CompraBoletos() {
                     </div>
                 </div>
 
-                <div class="col-md-5 containercito noselect">
-                    <div class="canvas">
-                        <div class="tracker tr-1"></div><div class="tracker tr-2"></div><div class="tracker tr-3"></div><div class="tracker tr-4"></div><div class="tracker tr-5"></div><div class="tracker tr-6"></div><div class="tracker tr-7"></div><div class="tracker tr-8"></div><div class="tracker tr-9"></div><div class="tracker tr-10"></div><div class="tracker tr-11"></div><div class="tracker tr-12"></div><div class="tracker tr-13"></div><div class="tracker tr-14"></div><div class="tracker tr-15"></div><div class="tracker tr-16"></div><div class="tracker tr-17"></div><div class="tracker tr-18"></div><div class="tracker tr-19"></div><div class="tracker tr-20"></div><div class="tracker tr-21"></div><div class="tracker tr-22"></div><div class="tracker tr-23"></div><div class="tracker tr-24"></div><div class="tracker tr-25"></div>
+                <div className="col-md-5 containercito noselect">
+                    <div className="canvas">
+                        <div className="tracker tr-1"></div><div className="tracker tr-2"></div><div className="tracker tr-3"></div><div className="tracker tr-4"></div><div className="tracker tr-5"></div><div className="tracker tr-6"></div><div className="tracker tr-7"></div><div className="tracker tr-8"></div><div className="tracker tr-9"></div><div className="tracker tr-10"></div><div className="tracker tr-11"></div><div className="tracker tr-12"></div><div className="tracker tr-13"></div><div className="tracker tr-14"></div><div className="tracker tr-15"></div><div className="tracker tr-16"></div><div className="tracker tr-17"></div><div className="tracker tr-18"></div><div className="tracker tr-19"></div><div className="tracker tr-20"></div><div className="tracker tr-21"></div><div className="tracker tr-22"></div><div className="tracker tr-23"></div><div className="tracker tr-24"></div><div className="tracker tr-25"></div>
                         <div id="cardcita">
                         <p id="prompt" className="text-center ">Precios</p>
-                        <div class="title">
+                        <div className="title">
                             <p className="fs-4 ">Vip: {/* Adjuntar el precio */}</p>
                             <p className="fs-4 ">Preferente: {/* Adjuntar el precio */}</p>
                             <p className="fs-4 ">General: {/* Adjuntar el precio */}</p><br/>
@@ -53,9 +53,9 @@ function CompraBoletos() {
                         </div>
                     </div>
                 </div>
-                <div class="row justify-content-center mt-5">
-                    <div class="cards col-md-4">
-                        <div class="card color">
+                <div className="row justify-content-center mt-5">
+                    <div className="cards col-md-4">
+                        <div className="card color">
                             <div className="mt-5 text-center">
                                 <PayPalButton/>
                             </div>

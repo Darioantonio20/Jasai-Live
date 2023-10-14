@@ -89,7 +89,7 @@ function Registro() {
                         <div className="col-lg-6 mb-5 mb-lg-0">
                             <div className="card cascading-right estiloCard">
                                 <div className="card-body p-5 shadow-5 text-center">
-                                    <h2 className="fw-bold mb-5">Inicio de sesión</h2>
+                                    <h2 className="fw-bold mb-5">Registro</h2>
                                     <form>
                                         <div className="form-outline mb-4">
                                             <input

@@ -37,14 +37,14 @@ function Chart() {
   return (
     <>
     <div className='row'>
-      <div class="col-6 mt-5">
-        <div class="card text-center">
-          <div class="card-header">
+      <div className="col-md-6 col-sm-12 mt-5">
+        <div className="card text-center">
+          <div className="card-header">
             Grafica de pastel
           </div>
-          <div class="card-body">
-            <h5 class="card-title"></h5>
-            <div className="text-center">
+          <div className="card-body">
+            <h5 className="card-title"></h5>
+            <div classNameName="text-center">
               <div id="chart">
                 <ReactApexChart
                   options={chartData.options}
@@ -54,32 +54,28 @@ function Chart() {
               </div>
             </div>
           </div>
-          <div class="card-footer text-body-secondary">
-          Datos del afore del concierto
+          <div className="card-footer text-body-secondary">
+            Datos del afore del concierto
           </div>
         </div>
       </div>
-      <div class="col-6 mt-5">
-        <div class="card text-center">
-          <div class="card-header">
+      <div className="col-md-6 col-sm-12 mt-5">
+        <div className="card text-center">
+          <div className="card-header">
             Datos Obtenidos
           </div>
-          <div class="card-body">
-            <h5 class="card-title"></h5>
+          <div className="card-body">
+            <h5 className="card-title"></h5>
             <div className="text-center">
               Datos
             </div>
           </div>
-          <div class="card-footer text-body-secondary">
-      
+          <div className="card-footer text-body-secondary">
+          
           </div>
         </div>
       </div>
     </div>
-    
-
-     
-    
     </>
   );
 }

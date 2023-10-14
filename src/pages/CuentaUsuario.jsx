@@ -5,15 +5,15 @@ function CuentaUsuario() {
         <>
             <NavBar/>
             <div className='row'>
-                <div class="col-12 mt-5">
-                    <div class="card text-center">
-                        <div class="card-header">
+                <div className="col-12 mt-5">
+                    <div className="card text-center">
+                        <div className="card-header">
                             ¡¡¡Concierto!!!
                         </div>
-                    <div class="card-body">
+                    <div className="card-body">
                         Aquí el video en vivo
                     </div>
-                        <div class="card-footer text-body-secondary">
+                        <div className="card-footer text-body-secondary">
                         Jasai-Live
                         </div>
                     </div>

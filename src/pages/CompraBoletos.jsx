@@ -1,7 +1,6 @@
 import Footer from "../components/atoms/Footer";
 import NavBar from "../components/atoms/NavBar";
 import IconoBlancoBoleto from "../assets/img/formaboletoBlanco.svg";
-import IconoSection2 from "../assets/img/iconoSection2.png";
 import PayPalButton from "../components/atoms/PayPalButton";
 
 function CompraBoletos() {

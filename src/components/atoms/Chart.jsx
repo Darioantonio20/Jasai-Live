@@ -44,7 +44,7 @@ function Chart() {
           </div>
           <div className="card-body">
             <h5 className="card-title"></h5>
-            <div classNameName="text-center">
+            <div className="text-center">
               <div id="chart">
                 <ReactApexChart
                   options={chartData.options}

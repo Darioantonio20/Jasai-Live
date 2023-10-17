@@ -39,20 +39,26 @@ function NavBar() {
                                 </li>
                             ) : (
                                 // Si el usuario ha iniciado sesión
-                                userContext.tipo === "Usuario" && (
-                                <>
+                                userContext.tipo === "Usuario" ? (
+                                    <>
+                                        <li className="nav-item m-2">
+                                            <Link to="/compraBoletos" className="nav-link" href="#">
+                                                Compra de boletos
+                                            </Link>
+                                        </li>
+                                        <li className="nav-item m-2">
+                                            <Link to="/usuario" className="nav-link" href="#">
+                                                Cuenta de Usuario
+                                            </Link>
+                                        </li>
+                                    </>
+                                ) : userContext.tipo === "Administrador" ? ( // Agregar esta parte
                                     <li className="nav-item m-2">
-                                        <Link to="/compraBoletos" className="nav-link" href="#">
-                                            Compra de boletos
+                                        <Link to="/admin" className="nav-link" href="#">
+                                            Cuenta de Admin
                                         </Link>
                                     </li>
-                                    <li className="nav-item m-2">
-                                        <Link to="/usuario" className="nav-link" href="#">
-                                            Cuenta de Usuario
-                                        </Link>
-                                    </li>
-                                </> 
-                                ) 
+                                ) : null
                             )}
                         </ul>
                     </div>

@@ -1,71 +1,58 @@
-import React, { useState } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
+import React, { useState, useRef } from 'react';
 import Swal from 'sweetalert2';
-import ImgLoginRegisterFondo from "../assets/img/imgLoginRegister.png";
 import NavBar from "../components/atoms/NavBar";
+import ImgLoginRegisterFondo from "../assets/img/imgLoginRegister.png";
 
 const InicioSesion = () => {
-    const [correo, setCorreo] = useState('');
-    const [contrasena, setContrasena] = useState('');
+    const form = useRef();
     const navigate = useNavigate();
 
-    const handleLogin = () => {
-        const usuarios = [
-            {
-                correo: 'usuario@example.com',
-                contrasena: 'contrasenaUsuario',
-                tipo: 'usuario',
-            },
-            {
-                correo: 'admin@example.com',
-                contrasena: 'contrasenaAdmin',
-                tipo: 'admin',
-            },
-        ];
+    const handlerClick = (e) => {
+        e.preventDefault();
+        const formData = new FormData(form.current);
+        const Correo = formData.get('Correo');
+        const Contrasena = formData.get('Contrasena');
 
-        const usuario = usuarios.find((u) => u.correo === correo);
-
-        if (usuario) {
-            if (usuario.contrasena === contrasena) {
-                console.log('Inicio de sesión exitoso');
-                console.log('Datos del usuario:', usuario);
-
-                if (usuario.tipo === 'admin') {
-                 
-                    console.log("admin");
-                    navigate('/admin');
-                } else {
-                    
-                    console.log("usuario");
-                    navigate('/usuario');
-                }
-
-                Swal.fire({
-                    icon: 'success',
-                    title: 'Inicio de sesión exitoso',
-                    text: '¡Bienvenido!',
-                });
-            } else {
-                Swal.fire({
-                    icon: 'error',
-                    title: 'Contraseña incorrecta',
-                    text: 'Por favor, verifica tu contraseña.',
-                });
-            }
-        } else {
+        if (!Correo || !Contrasena) {
             Swal.fire({
-                icon: 'error',
-                title: 'Correo no encontrado',
-                text: 'Por favor, verifica tu correo electrónico.',
+                icon: 'question',
+                text: 'Rellena todos los campos',
             });
+        } else {
+            fetch(`http://127.0.0.1:3000/usuarios/${Correo}/${Contrasena}`)
+                .then(response => response.json())
+                .then(data => {
+                    if (data.message === 'Contraseña incorrecta') {
+                        Swal.fire({
+                            icon: 'error',
+                            text: 'La Contraseña es incorrecta',
+                        });
+                    } else if (data.message === "Nombre de usuario incorrecto") {
+                        Swal.fire({
+                            icon: 'error',
+                            text: 'El Nombre de usuario es incorrecto',
+                        });
+                    } else if (data.message === 'Has iniciado sesión') {
+                        Swal.fire({
+                            icon: 'success',
+                            text: `Bienvenido ${Correo}`,
+                            timer: 3000,
+                            showConfirmButton: false,
+                        }).then(() => {
+                            navigate("/usuario");
+                        });
+                    }
+                })
+                .catch(error => {
+                    console.error('Error al iniciar sesión:', error.message);
+                    Swal.fire({
+                        icon: 'error',
+                        text: 'Error al iniciar sesión. Inténtalo de nuevo.',
+                    });
+                });
         }
     };
-
-    const handleSubmit = (e) => {
-        e.preventDefault();
-        handleLogin();
-    };
-
     return (
         <>
             <NavBar/>
@@ -76,13 +63,12 @@ const InicioSesion = () => {
                             <div className="card cascading-right estiloCard">
                                 <div className="card-body p-5 shadow-5 text-center">
                                     <h2 className="fw-bold mb-5">Inicio de sesión</h2>
-                                    <form onSubmit={handleSubmit}>
+                                    <form ref={form}>
                                         <div className="form-outline mb-4">
                                             <input
                                                 type="text"
-                                                id="form3Example3"
-                                                value={correo}
-                                                onChange={(e) => setCorreo(e.target.value)}
+                                              
+                                                name="Correo"
                                                 className="form-control text-center fw-bold"
                                                 placeholder="Correo electrónico"
                                             />
@@ -90,14 +76,12 @@ const InicioSesion = () => {
                                         <div className="form-outline mb-4">
                                             <input
                                                 type="password"
-                                                id="form3Example4"
-                                                value={contrasena}
-                                                onChange={(e) => setContrasena(e.target.value)}
+                                                name="Contrasena"
                                                 className="form-control text-center fw-bold"
                                                 placeholder="Contraseña"
                                             />
                                         </div>
-                                        <button type="submit" className="btnVerMas mb-4 mt-4">
+                                        <button type="submit" className="btnVerMas mb-4 mt-4" onClick={handlerClick} id="buton"> 
                                             Iniciar sesión
                                         </button>
                                         <div className="text-center mt-4">
@@ -118,3 +102,6 @@ const InicioSesion = () => {
 };
 
 export default InicioSesion;
+
+
+

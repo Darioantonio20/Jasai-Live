@@ -8,76 +8,34 @@ function Registro() {
     const nameRef = useRef();
     const contrasenaRef = useRef();
     const correoRef = useRef();
-    const telefonoRef = useRef();
+    const formRef = useRef(); // Agrega una referencia para el formulario
 
-    const handlerClick = async (e) => {
+    const handlerClick = (e) => {
         e.preventDefault();
+        const formData = new FormData(formRef.current); // Usa la referencia del formulario
+        let URI = "http://127.0.0.1:3000/Usuarios";
+        let options = {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({
+                Nombre: formData.get("Nombre"),
+                Contrasena: formData.get("Contrasena"),
+                Correo: formData.get("Correo"),
+            }),
+        };
+        console.log(options.body);
+        fetch(URI, options)
+            .then((response) => response.json())
+            .then((data) => {
+                alert(JSON.stringify(data));
 
-        const formData = new FormData();
-        formData.append("user", nameRef.current.value);
-        formData.append("contrasena", contrasenaRef.current.value);
-        formData.append("correo", correoRef.current.value);
-        formData.append("telefono", telefonoRef.current.value);
-
-        const formDataObject = {};
-        formData.forEach((value, key) => {
-            formDataObject[key] = value;
-        });
-        console.log("Objeto de Datos del Formulario:", formDataObject);
-
-        try {
-            const correosResponse = await fetch("http://127.0.0.1:3000/usuarios");
-            const correosExistentes = await correosResponse.json();
-
-            const listaCorreos = correosExistentes.map((correo) => correo.correo);
-
-            if (listaCorreos.includes(formData.get("correo"))) {
+                //Alert con Sweetaler
                 Swal.fire({
-                    icon: "error",
-                    title: "Error al registrar usuario",
-                    text: `El correo ${formData.get("correo")} ya está en uso.`,
+                    text: JSON.stringify("Bienvenido " + data.Nombre)
                 });
-            } else {
-                const URI = "http://127.0.0.1:3000/usuarios";
-                const opciones = {
-                    method: "POST",
-                    headers: {
-                        "Content-Type": "application/json",
-                    },
-                    body: JSON.stringify({
-                        user: formData.get("user"),
-                        contrasena: formData.get("contrasena"),
-                        correo: formData.get("correo"),
-                        telefono: formData.get("telefono")
-                    }),
-                };
-
-                const response = await fetch(URI, opciones);
-                const data = await response.json();
-
-                if (data.message === "Usuario registrado exitosamente") {
-                    Swal.fire({
-                        icon: "success",
-                        text: `Correo registrado: ${formData.get("correo")}`,
-                        timer: 1500,
-                    }).then(() => {
-                    });
-                } else {
-                    Swal.fire({
-                        icon: "error",
-                        title: "Error al registrar usuario",
-                        text: data.error,
-                    });
-                }
-            }
-        } catch (error) {
-            Swal.fire({
-                icon: "error",
-                title: "Error en la solicitud",
-                text: "Hubo un problema al intentar registrar el usuario.",
             });
-            console.error("Error:", error);
-        }
     };
 
     return (
@@ -89,12 +47,12 @@ function Registro() {
                         <div className="col-lg-6 mb-5 mb-lg-0">
                             <div className="card cascading-right estiloCard">
                                 <div className="card-body p-5 shadow-5 text-center">
-                                    <h2 className="fw-bold mb-5">Registro</h2>
-                                    <form>
+                                    <h2 className="fw-bold mb-5">Inicio de sesión</h2>
+                                    <form ref={formRef}> 
                                         <div className="form-outline mb-4">
                                             <input
                                                 type="text"
-                                                name="user"
+                                                name="Nombre"
                                                 ref={nameRef}
                                                 id="form3Example3"
                                                 className="form-control text-center fw-bold"
@@ -103,7 +61,7 @@ function Registro() {
                                         </div>
                                         <div className="form-outline mb-4">
                                             <input
-                                                name="contrasena"
+                                                name="Contrasena"
                                                 ref={contrasenaRef}
                                                 id="form3Example4"
                                                 className="form-control text-center fw-bold"
@@ -113,21 +71,11 @@ function Registro() {
                                         <div className="form-outline mb-4">
                                             <input
                                                 type="email"
-                                                name="correo"
+                                                name="Correo"
                                                 ref={correoRef}
                                                 id="form3Example3"
                                                 className="form-control text-center fw-bold"
                                                 placeholder="Correo"
-                                            />
-                                        </div>
-                                        <div className="form-outline mb-4">
-                                            <input
-                                                type="number"
-                                                name="telefono"
-                                                ref={telefonoRef}
-                                                id="form3Example4"
-                                                className="form-control text-center fw-bold"
-                                                placeholder="telefono"
                                             />
                                         </div>
                                         <button type="submit" onClick={handlerClick} className="btnVerMas mb-4 mt-4">

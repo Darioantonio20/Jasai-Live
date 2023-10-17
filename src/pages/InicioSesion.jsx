@@ -1,12 +1,18 @@
 import { useNavigate, Link } from 'react-router-dom';
-import React, { useState, useRef } from 'react';
+import React, { useState, useRef, useContext } from 'react';
 import Swal from 'sweetalert2';
+import ContextoDeUsuario from "../context/ContextoDeUsuario"; // Importa el contexto
 import NavBar from "../components/atoms/NavBar";
 import ImgLoginRegisterFondo from "../assets/img/imgLoginRegister.png";
 
 const InicioSesion = () => {
     const form = useRef();
     const navigate = useNavigate();
+    const { setUserContext } = useContext(ContextoDeUsuario);
+
+    // Credenciales del administrador
+    const usuarioAdmin = 'AdminJasaiLive';
+    const contrasenaAdmin = 'JasaiLive';
 
     const handlerClick = (e) => {
         e.preventDefault();
@@ -18,6 +24,18 @@ const InicioSesion = () => {
             Swal.fire({
                 icon: 'question',
                 text: 'Rellena todos los campos',
+            });
+        } else if (Correo === usuarioAdmin && Contrasena === contrasenaAdmin) {
+            // El usuario ha iniciado sesión como administrador
+            Swal.fire({
+                icon: 'success',
+                text: `Bienvenido ${Correo}`,
+                timer: 3000,
+                showConfirmButton: false,
+            }).then(() => {
+                navigate("/admin");
+                // Establecer el usuario en el contexto (cambiar el rol si es necesario)
+                setUserContext({ tipo: "Administrador" });
             });
         } else {
             fetch(`http://127.0.0.1:3000/usuarios/${Correo}/${Contrasena}`)
@@ -40,7 +58,16 @@ const InicioSesion = () => {
                             timer: 3000,
                             showConfirmButton: false,
                         }).then(() => {
-                            navigate("/usuario");
+                            // Verifica el rol del usuario y redirige a la vista correspondiente
+                            if (data.rol === 'administrador') {
+                                navigate("/admin");
+                                // Establecer el usuario en el contexto (cambiar el rol si es necesario)
+                                setUserContext({ tipo: "Administrador" });
+                            } else {
+                                navigate("/usuario");
+                                // Establecer el usuario en el contexto
+                                setUserContext({ tipo: "Usuario" });
+                            }
                         });
                     }
                 })
@@ -53,9 +80,10 @@ const InicioSesion = () => {
                 });
         }
     };
+
     return (
         <>
-            <NavBar/>
+            <NavBar />
             <section className="text-center text-lg-start">
                 <div className="container py-4">
                     <div className="row g-0 align-items-center">
@@ -67,7 +95,6 @@ const InicioSesion = () => {
                                         <div className="form-outline mb-4">
                                             <input
                                                 type="text"
-                                              
                                                 name="Correo"
                                                 className="form-control text-center fw-bold"
                                                 placeholder="Correo electrónico"
@@ -81,11 +108,11 @@ const InicioSesion = () => {
                                                 placeholder="Contraseña"
                                             />
                                         </div>
-                                        <button type="submit" className="btnVerMas mb-4 mt-4" onClick={handlerClick} id="buton"> 
+                                        <button type="submit" className="btnVerMas mb-4 mt-4" onClick={handlerClick} id="buton">
                                             Iniciar sesión
                                         </button>
                                         <div className="text-center mt-4">
-                                            <Link to="/registro">Regístrate</Link> 
+                                            <Link to="/registro">Regístrate</Link>
                                         </div>
                                     </form>
                                 </div>
@@ -102,6 +129,3 @@ const InicioSesion = () => {
 };
 
 export default InicioSesion;
-
-
-

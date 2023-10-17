@@ -92,21 +92,93 @@ function VisualizacionBoletos() {
       const datosObtenidos = [
         {
           id: 1,
-          lugar: "Gran Cafe | Tuxtla Gutierrez, chiapas",
-          descripcion: "café concert",
-          direccion: "Estadio panchon contreras tuxtla gutierrez, chiapas",
-          fecha: "Fecha 1",
-          hora: "Hora 1",
+          lugar: "Gran Cafe | Tuxtla Gutierrez, Chiapas",
+          descripcion: "Café Concert",
+          direccion: "Estadio Panchon Contreras, Tuxtla Gutierrez, Chiapas",
+          fecha: "22/11/2023",
+          hora: "3:00 Pm",
           localidades: ["Vip", "Preferente", "General"],
         },
         {
           id: 2,
-          lugar: "Otro lugar | Otra ciudad",
-          descripcion: "Otra descripción",
-          direccion: "Otra dirección",
-          fecha: "Fecha 2",
-          hora: "Hora 2",
-          localidades: ["Localidad 1", "Localidad 2"],
+          lugar: "Kings of leons | United State",
+          descripcion: "Kings of leons",
+          direccion: "169 Main Street, Springfield, IL 62701",
+          fecha: "25/11/2023",
+          hora: "8:00 Pm",
+          localidades: ["Vip", "Preferente", "General"],
+        },
+        {
+          id: 3,
+          lugar: "Molotov Fest | Avenida Central 456, Ciudad del Carmen",
+          descripcion: "Molotov Fest",
+          direccion: "Teatro del Este, CDMX",
+          fecha: "29/11/2023",
+          hora: "10:00 Pm",
+          localidades: ["Vip", "Preferente", "General"],
+        },
+        {
+          id: 4,
+          lugar: "Concert Fest | Ciudad Capital",
+          descripcion: "Concert Fest",
+          direccion: "Teatro Municipal de la Ciudad, Calle Principal 123,",
+          fecha: "30/11/2023",
+          hora: "5:00 Pm",
+          localidades: ["Vip", "Preferente", "General"],
+        },
+        {
+          id: 5,
+          lugar: "Conciertito de Rock | Tuxtla Gutiérrez, Chiapas",
+          descripcion: "Conciertito de Rock",
+          direccion: "Estadio Panchón Contreras",
+          fecha: "04/12/2023",
+          hora: "7:30 Pm",
+          localidades: ["Vip", "Preferente", "General"],
+        },
+        {
+          id: 6,
+          lugar: "Rock Bones | CDMX",
+          descripcion: "Rock Bones",
+          direccion: "Angel de la independencia",
+          fecha: "06/12/2023",
+          hora: "11:00 Pm",
+          localidades: ["Vip", "Preferente", "General"],
+        },
+        {
+          id: 7,
+          lugar: "Concierto de Jazz | Ciudad Creativa",
+          descripcion: "Concierto de Jazz",
+          direccion: "Teatro de la Avenida, Avenida del Arte 890, Ciudad Creativa",
+          fecha: "08/12/2023",
+          hora: "9:30 Pm",
+          localidades: ["Vip", "Preferente", "General"],
+        },
+        {
+          id: 8,
+          lugar: "Concierto de Blues | Ciudad Luminosa",
+          descripcion: "Concierto de Blues",
+          direccion: "Teatro de la Luz, Calle Principal 789, Ciudad Luminosa",
+          fecha: "10/12/2023",
+          hora: "10:30 Pm",
+          localidades: ["Vip", "Preferente", "General"],
+        },
+        {
+          id: 9,
+          lugar: "Concierto de Reggae | Ciudad Nocturna",
+          descripcion: "Concierto de Reggae",
+          direccion: "Teatro de la Noche, Avenida Oscura 234, Ciudad Nocturna",
+          fecha: "12/12/2023",
+          hora: "6:00 Pm",
+          localidades: ["Vip", "Preferente", "General"],
+        },
+        {
+          id: 10,
+          lugar: "Los Samuelitos | Ciudad Bocado",
+          descripcion: "Los Samuelitos",
+          direccion: "Up chiapas, UD69",
+          fecha: "15/12/2023",
+          hora: "4:30 Pm",
+          localidades: ["Vip", "Preferente", "General"],
         },
       ];
       setDatosDesdeBaseDeDatos(datosObtenidos);
@@ -118,11 +190,7 @@ function VisualizacionBoletos() {
       <NavBar />
       <div className="row d-flex">
         {datosDesdeBaseDeDatos.map((datos, index) => (
-          <div key={index}>
-            {[...Array(2)].map((_, cartaIndex) => (
-              <Carta key={cartaIndex} datos={datos} />
-            ))}
-          </div>
+          <Carta key={index} datos={datos} />
         ))}
       </div>
     </>

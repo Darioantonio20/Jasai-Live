@@ -2,8 +2,10 @@ import React, { useState, useEffect } from "react";
 import NavBar from "../components/atoms/NavBar";
 import IconoBlancoBoleto from "../assets/img/formaboletoBlanco.svg";
 import imgBoleto from "../assets/img/ImgBoleto2.png";
+import "../assets/styles/Progress.css";
 
 function Carta({ datos }) {
+  
   return (
     <div className="row d-flex mt-3 mb-3">
         <div className="col-sm-12 col-md-6 col-xl-6 d-flex justify-content-md-end justify-content-sm-center">
@@ -85,9 +87,9 @@ function Carta({ datos }) {
 function VisualizacionBoletos() {
   // Simula la obtención de datos desde una base de datos en el futuro
   const [datosDesdeBaseDeDatos, setDatosDesdeBaseDeDatos] = useState([]);
+  const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
-    // Simula una llamada a una API o base de datos
     setTimeout(() => {
       const datosObtenidos = [
         {
@@ -182,17 +184,34 @@ function VisualizacionBoletos() {
         },
       ];
       setDatosDesdeBaseDeDatos(datosObtenidos);
-    }, 1000); // Simula una demora en la obtención de datos
+      setIsLoading(false); // Marcamos como cargados los datos
+    }, 5035); // Simula una demora en la obtención de datos
   }, []);
+  
 
   return (
     <>
       <NavBar />
-      <div className="row d-flex">
-        {datosDesdeBaseDeDatos.map((datos, index) => (
-          <Carta key={index} datos={datos} />
-        ))}
-      </div>
+      {isLoading ? (
+        <div className="row d-flex justify-content-center">
+          <div className="containercito">
+            <div class="loadercito"></div>
+            <div class="loadercito"></div>
+            <div class="loadercito"></div>
+          </div>
+          <div className="col-10 text-center">
+            <div class="loader">
+              <div></div>
+            </div>
+          </div>
+        </div>
+      ) : (
+        <div className="row d-flex">
+          {datosDesdeBaseDeDatos.map((datos, index) => (
+            <Carta key={index} datos={datos} />
+          ))}
+        </div>
+      )}
     </>
   );
 }

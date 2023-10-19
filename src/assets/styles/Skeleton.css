@@ -21,11 +21,7 @@
     width: 28rem;
     border-radius: 100%;
   }
-  
-  .cardcititita__description {
-    height: 100px;
-  }
-  
+
   @keyframes shimmer {
     to {
       background-position: -100% 0;

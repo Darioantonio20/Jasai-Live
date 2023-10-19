@@ -52,7 +52,7 @@ function Chart() {
               <h5 className="card-title"></h5>
               <div className="text-center">
                 {loading ? ( // Mostrar componente de carga mientras se está cargando
-                  <div class="cardcititita">
+                  <div class="cardcititita d-flex justify-content-center align-items-center">
                     <div class="cardcititita__skeleton cardcititita__title"></div>
                   </div>
                 ) : (
@@ -83,7 +83,6 @@ function Chart() {
               </div>
             </div>
             <div className="card-footer text-body-secondary">
-            
             </div>
           </div>
         </div>

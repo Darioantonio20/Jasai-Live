@@ -40,7 +40,7 @@ function Carta({ datos, boletosComprados, setBoletosComprados }) {
       );
     }
   };
-
+//cambio
   
   return (
     <div className="row d-flex mt-3 mb-3">

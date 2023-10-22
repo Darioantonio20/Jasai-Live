@@ -225,6 +225,16 @@ function VisualizacionBoletos() {
       setIsLoading(false); // Marcamos como cargados los datos
     }, 5050); // Simula una demora en la obtención de datos
   }, []);
+
+  const getBoletoPorId = (id) => {
+    return boletosComprados.find((boleto) => boleto.id === id);
+  };
+
+  // Para obtener el boleto con ID 1
+const boletoId1 = getBoletoPorId(1);
+
+// Para obtener el boleto con ID 2
+const boletoId2 = getBoletoPorId(2);
   
 
   return (

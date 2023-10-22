@@ -6,17 +6,13 @@ function Chart() {
   const [loading, setLoading] = useState(true); // Estado para controlar la visibilidad del componente de carga
 
   const [chartData, setChartData] = useState({
-    series: [14, 23, 21, 17, 15, 10, 12, 17, 21],
+    series: [44, 55, 13, 43, 22],
     options: {
       chart: {
-        type: 'polarArea',
+        width: 380,
+        type: 'pie',
       },
-      stroke: {
-        colors: ['#fff'],
-      },
-      fill: {
-        opacity: 0.8,
-      },
+      labels: ['Team A', 'Team B', 'Team C', 'Team D', 'Team E'],
       responsive: [
         {
           breakpoint: 480,
@@ -46,7 +42,7 @@ function Chart() {
         <div className="col-md-6 col-sm-12 mt-5">
           <div className="card text-center">
             <div className="card-header">
-              Grafica de pastel
+              Gráfica de pastel
             </div>
             <div className="card-body">
               <h5 className="card-title"></h5>
@@ -60,7 +56,7 @@ function Chart() {
                     <ReactApexChart
                       options={chartData.options}
                       series={chartData.series}
-                      type="polarArea"
+                      type="pie"
                     />
                   </div>
                 )}

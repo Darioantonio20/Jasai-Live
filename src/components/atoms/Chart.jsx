@@ -121,7 +121,7 @@ function Chart() {
         width: 380,
         type: 'pie',
       },
-      labels: tablaFrecuencias.map((fila, index) => `Clase ${index + 1}`),
+      labels: tablaFrecuencias.map((fila) => `Li ${fila.Li} - Ls ${fila.Ls} se encontraron ${fila.fi} personas`),
       responsive: [
         {
           breakpoint: 480,
@@ -135,7 +135,7 @@ function Chart() {
           },
         },
       ],
-    },
+    }
   };
 
   useEffect(() => {
@@ -151,13 +151,6 @@ function Chart() {
           <div className="card text-center">
             <div className="card-header">Gráfica de pastel</div>
             <div className="card-body">
-              <h5 className="card-title">Resultados Estadísticos:</h5>
-              <p>Media: {media}</p>
-              <p>Moda: {moda}</p>
-              <p>Mediana: {mediana}</p>
-              <p>Desviación Estándar: {desviacionEstandar}</p>
-              <p>K: {k}</p>
-              <p>R: {R}</p>
               <div className="text-center">
                 {loading ? (
                   <div className="cardcititita d-flex justify-content-center align-items-center">
@@ -183,6 +176,19 @@ function Chart() {
             <div className="card-body">
               <h5 className="card-title">Datos de Ingreso:</h5>
               <p>{datos.join(', ')}</p>
+              <div className="card-footer text-body-secondary">
+                <h5 className="card-title">Resultados Estadísticos:</h5>
+                  <p>Media: {media}</p>
+                  <p>Moda: {moda}</p>
+                  <p>Mediana: {mediana}</p>
+                  <p>Desviación Estándar: {desviacionEstandar}</p>
+                  <p>K: {k}</p>
+                  <p>R: {R}</p>
+                  <p>S: {S}</p>
+                  <p>S²: {S2}</p>
+                  <p>N: {N}</p>
+                  <p>Ai: {Ai}</p>
+              </div>
             </div>
             <div className="card-footer text-body-secondary">
               <div className="table-responsive">
@@ -218,13 +224,6 @@ function Chart() {
                 </table>
               </div>
             </div>
-          </div>
-          <div className="card-footer text-body-secondary">
-            <h5>Valores Adicionales:</h5>
-            <p>S: {S}</p>
-            <p>S²: {S2}</p>
-            <p>N: {N}</p>
-            <p>Ai: {Ai}</p>
           </div>
         </div>
       </div>

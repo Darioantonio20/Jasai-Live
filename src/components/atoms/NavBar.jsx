@@ -51,6 +51,11 @@ function NavBar() {
                                                 Cuenta de Usuario
                                             </Link>
                                         </li>
+                                        <li className="nav-item m-2">
+                                            <Link to="/enVivo" className="nav-link" href="#">
+                                                ¡En vivo!
+                                            </Link>
+                                        </li>
                                     </>
                                 ) : userContext.tipo === "Administrador" ? ( // Agregar esta parte
                                     <li className="nav-item m-2">

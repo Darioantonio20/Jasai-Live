@@ -1,9 +1,6 @@
 import NavBar from "../components/atoms/NavBar";
 
 function CuentaUsuario({ boletosComprados }) {
-  // Simulación de espera
-  const estaCargando = boletosComprados === undefined;
-
   return ( 
     <>
       <NavBar />
@@ -11,18 +8,10 @@ function CuentaUsuario({ boletosComprados }) {
         <div className="col-12 mt-5">
           <div className="card text-center">
             <div className="card-header">
-              ¡¡¡Concierto!!!
+              Mi carrito
             </div>
             <div className="card-body">
-              {estaCargando ? (
-                // Mostrar un mensaje de espera mientras carga
-                <div className="cardcitaVideo d-flex justify-content-center align-items-center">
-                  <div className="cardcitaVideo__skeleton cardcitaVideo__title"></div>
-                </div>
-              ) : (
-                // Aquí puedes colocar tu contenido personalizado una vez que haya cargado
-                <p>Mi contenido personalizado va aquí.</p>
-              )}
+                <p>Boletitos</p>
             </div>
             <div className="card-footer text-body-secondary">
               Jasai-Live

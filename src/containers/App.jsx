@@ -10,6 +10,7 @@ import ProtectedRoute from '../utils/ProtectedRoute';
 import ContextoDeUsuario from '../context/ContextoDeUsuario';
 import CuentaUsuario from '../pages/CuentaUsuario';
 import CuentaAdmin from '../pages/CuentaAdmin';
+import EnVivo from '../pages/EnVivo';
 import '../assets/styles/App.css';
 
 function App() {
@@ -27,6 +28,7 @@ function App() {
             <Route path="/visualizacionBoletos" element={<VisualizacionBoletos/>}/>
             <Route element={<ProtectedRoute canActivate={user}/>}>
               <Route path="/compraBoletos" element={<CompraBoletos/>}/>
+              <Route path="/enVivo" element={<EnVivo/>}/>
               <Route path="/usuario" element={<CuentaUsuario/>}/>
               <Route path="/admin" element={<CuentaAdmin/>}/>
             </Route>

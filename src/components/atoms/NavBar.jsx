@@ -31,7 +31,7 @@ function NavBar() {
                                     Eventos
                                 </Link>
                             </li>
-                            {!userContext ? ( // Si el usuario no ha iniciado sesión
+                            {!userContext ? ( 
                                 <li className="nav-item m-2">
                                     <Link to="/inicioSesion" className="nav-link" href="#">
                                         Inicio de sesión
@@ -57,7 +57,7 @@ function NavBar() {
                                             </Link>
                                         </li>
                                     </>
-                                ) : userContext.tipo === "Administrador" ? ( // Agregar esta parte
+                                ) : userContext.tipo === "Administrador" ? ( 
                                     <li className="nav-item m-2">
                                         <Link to="/admin" className="nav-link" href="#">
                                             Cuenta de Admin

@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import NavBar from "../components/atoms/NavBar";
 import IconoBlancoBoleto from "../assets/img/formaboletoBlanco.svg";
-import imgBoleto from "../assets/img/ImgBoleto2.png";
+import imgBoleto from "../assets/img/ImgBoleto3.png";
 import CuentaUsuario from "../pages/CuentaUsuario"; 
 import "../assets/styles/Progress.css";
 

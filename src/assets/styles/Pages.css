@@ -705,3 +705,23 @@
   transition: 0.3s;
   transform: scale(0.4) translate(160px, 150px);
 }
+
+
+/*button panel to the controlcito*/
+
+.buttoncititito {
+  background-color: #e8e8e8; /* Color de fondo original */
+  color: #090909; /* Color de texto original */
+  padding: 0.7em 1.7em;
+  font-size: 18px;
+  border: none;
+  border-radius: 0.5em;
+  transition: background-color 0.3s, color 0.3s;
+  cursor: pointer;
+}
+
+/* Estilos al pasar el ratón sobre el botón */
+.buttoncititito:hover {
+  background-color: #000; /* Nuevo color de fondo al pasar el ratón */
+  color: #fff; /* Nuevo color de texto al pasar el ratón */
+}

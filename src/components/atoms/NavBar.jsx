@@ -1,10 +1,10 @@
 import { Link } from "react-router-dom";
-import { useContext, useEffect } from "react";
-import ContextoDeUsuario from "../../context/ContextoDeUsuario";
+//import { useContext, useEffect } from "react";
+//import ContextoDeUsuario from "../../context/ContextoDeUsuario";
 import ImgJasaiLogo from "../../assets/img/jasaiLogo.png";
 
 function NavBar() {
-    const { userContext, setUserContext } = useContext(ContextoDeUsuario);
+    //const { userContext, setUserContext } = useContext(ContextoDeUsuario);
 
     return (
         <>
@@ -31,16 +31,13 @@ function NavBar() {
                                     Eventos
                                 </Link>
                             </li>
-                            {!userContext ? ( 
+                           
                                 <li className="nav-item m-2">
                                     <Link to="/inicioSesion" className="nav-link" href="#">
                                         Inicio de sesión
                                     </Link>
                                 </li>
-                            ) : (
-                                // Si el usuario ha iniciado sesión
-                                userContext.tipo === "Usuario" ? (
-                                    <>
+                    
                                         <li className="nav-item m-2">
                                             <Link to="/compraBoletos" className="nav-link" href="#">
                                                 Compra de boletos
@@ -56,15 +53,13 @@ function NavBar() {
                                                 ¡En vivo!
                                             </Link>
                                         </li>
-                                    </>
-                                ) : userContext.tipo === "Administrador" ? ( 
+                            
                                     <li className="nav-item m-2">
                                         <Link to="/admin" className="nav-link" href="#">
                                             Cuenta de Admin
                                         </Link>
                                     </li>
-                                ) : null
-                            )}
+                         
                         </ul>
                     </div>
                 </div>

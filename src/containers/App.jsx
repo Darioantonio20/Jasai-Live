@@ -7,7 +7,7 @@ import Registro from '../pages/Registro';
 import VisualizacionBoletos from '../pages/VisualizacionBoletos';
 import CompraBoletos from '../pages/CompraBoletos';
 //import ProtectedRoute from '../utils/ProtectedRoute';
-import ContextoDeUsuario from '../context/ContextoDeUsuario';
+//import ContextoDeUsuario from '../context/ContextoDeUsuario';
 import CuentaUsuario from '../pages/CuentaUsuario';
 import CuentaAdmin from '../pages/CuentaAdmin';
 import EnVivo from '../pages/EnVivo';

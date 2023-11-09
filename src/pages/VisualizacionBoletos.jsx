@@ -1,47 +1,11 @@
 import React, { useState, useEffect } from "react";
 import NavBar from "../components/atoms/NavBar";
 import IconoBlancoBoleto from "../assets/img/formaboletoBlanco.svg";
-import imgBoleto from "../assets/img/ImgBoleto3.png";
-import CuentaUsuario from "../pages/CuentaUsuario"; 
+import imgBoleto from "../assets/img/ImgBoleto2.png";
 import "../assets/styles/Progress.css";
 
-function Carta({ datos, boletosComprados, setBoletosComprados }) {
-  const comprarBoleto = () => {
-    const boletoComprado = {
-      lugar: datos.lugar,
-      descripcion: datos.descripcion /* Agrega más detalles del boleto */,
-    };
-    const boletoDuplicado = boletosComprados.some(
-      (boleto) =>
-        boleto.lugar === boletoComprado.lugar &&
-        boleto.descripcion === boletoComprado.descripcion
-    );
+function Carta({ datos }) {
 
-    if (boletoDuplicado) {
-      Swal.fire({
-        position: 'center',
-        icon: 'error',
-        title: '¡Este boleto ya está en tu carrito! No puedes comprarlo de nuevo.',
-        showConfirmButton: false,
-        timer: 3000
-      });
-    } else {
-      const nuevosBoletosComprados = [...boletosComprados, boletoComprado];
-      setBoletosComprados(nuevosBoletosComprados);
-
-      const mensajeBoletos = nuevosBoletosComprados.map((boleto) => {
-        return `Boleto para ver: ${boleto.descripcion}`;
-      });
-
-      Swal.fire(
-        '¡Boleto Comprado!',
-        `\n${mensajeBoletos.join("\n")}`,
-        'success' 
-      );
-    }
-  };
-//cambio
-  
   return (
     <div className="row d-flex mt-3 mb-3">
         <div className="col-sm-12 col-md-6 col-xl-6 d-flex justify-content-md-end justify-content-sm-center">
@@ -90,11 +54,9 @@ function Carta({ datos, boletosComprados, setBoletosComprados }) {
                     </div>
                 </div>
                 <div className="barraBlancaGrande">-</div>
-              
-                  <button type="submit" className="btnVerMas mb-4 mt-4" onClick={comprarBoleto}>
+                <button type="submit" className="btnVerMas mb-4 mt-4">
                     Comprar boleto
-                  </button>
-           
+                </button>
                 </div>
                 <img
                 className="rotaciónBoleto"
@@ -121,13 +83,13 @@ function Carta({ datos, boletosComprados, setBoletosComprados }) {
     </div>
   );
 }
-
 function VisualizacionBoletos() {
+  // Simula la obtención de datos desde una base de datos en el futuro
   const [datosDesdeBaseDeDatos, setDatosDesdeBaseDeDatos] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
-  const [boletosComprados, setBoletosComprados] = useState([]); // Estado para almacenar boletos comprados
 
   useEffect(() => {
+    // Simula una llamada a una API o base de datos
     setTimeout(() => {
       const datosObtenidos = [
         {
@@ -222,24 +184,18 @@ function VisualizacionBoletos() {
         },
       ];
       setDatosDesdeBaseDeDatos(datosObtenidos);
-      setIsLoading(false); // Marcamos como cargados los datos
-    }, 5050); // Simula una demora en la obtención de datos
+      setIsLoading(false);
+    }, 1000); // Simula una demora en la obtención de datos
   }, []);
-
-  const getBoletoPorId = (id) => {
-    return boletosComprados.find((boleto) => boleto.id === id);
-  };
-
-  // Para obtener el boleto con ID 1
-const boletoId1 = getBoletoPorId(1);
-
-// Para obtener el boleto con ID 2
-const boletoId2 = getBoletoPorId(2);
-  
 
   return (
     <>
       <NavBar />
+      <div className="row d-flex">
+        {datosDesdeBaseDeDatos.map((datos, index) => (
+          <Carta key={index} datos={datos} />
+        ))}
+      </div>
       {isLoading ? (
         <div className="row d-flex justify-content-center">
           <div className="containercito">
@@ -253,20 +209,7 @@ const boletoId2 = getBoletoPorId(2);
             </div>
           </div>
         </div>
-      ) : (
-        <div className="row d-flex">
-          {datosDesdeBaseDeDatos.map((datos, index) => (
-            <Carta
-              key={index}
-              datos={datos}
-              boletosComprados={boletosComprados}
-              setBoletosComprados={setBoletosComprados}
-            />
-          ))}
-        </div>
-      )}
-      {/* Renderiza el componente CuentaUsuario y pasa el estado boletosComprados */}
-      <CuentaUsuario boletosComprados={boletosComprados} />
+      ) : null}
     </>
   );
 }

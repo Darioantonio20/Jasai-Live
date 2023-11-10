@@ -59,6 +59,11 @@ function NavBar() {
                                             Cuenta de Admin
                                         </Link>
                                     </li>
+                                    <li className="nav-item m-2">
+                                        <Link to="/prueba" className="nav-link" href="#">
+                                            Paisa
+                                        </Link>
+                                    </li>
                          
                         </ul>
                     </div>

@@ -12,6 +12,7 @@ import CuentaUsuario from '../pages/CuentaUsuario';
 import CuentaAdmin from '../pages/CuentaAdmin';
 import EnVivo from '../pages/EnVivo';
 import '../assets/styles/App.css';
+import Prueba from '../components/atoms/Prueba';
 
 function App() {
   //const [ userContext, setUserContext] = useState('');
@@ -30,6 +31,7 @@ function App() {
             <Route path="/enVivo" element={<EnVivo/>}/>
             <Route path="/usuario" element={<CuentaUsuario/>}/>
             <Route path="/admin" element={<CuentaAdmin/>}/>
+            <Route path="/prueba" element={<Prueba/>}/>
           </Routes>
         </BrowserRouter>
   

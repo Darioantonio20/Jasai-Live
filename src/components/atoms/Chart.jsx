@@ -1,10 +1,13 @@
 import React, { useEffect, useState } from 'react';
 import ReactApexChart from 'react-apexcharts';
-import '../../assets/styles/Skeleton.css';
+import { Alert } from 'react-bootstrap';
+import NavBar from "../atoms/NavBar";
 
 function Chart() {
   const [loading, setLoading] = useState(true);
   const [apiData, setApiData] = useState([]);
+  const [error, setError] = useState(null);
+
   const [chartData, setChartData] = useState({
     series: [],
     options: {
@@ -29,38 +32,43 @@ function Chart() {
     },
   });
 
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const response = await fetch('http://44.219.12.178:3000/stats');
-        if (!response.ok) {
-          throw new Error('Network response was not ok');
-        }
-        const data = await response.json();
-        console.log(data);
-        setApiData(data);
-        setLoading(false);
-        // Actualiza chartData con los datos de la API
-        const newChartData = {
-          ...chartData,
-          series: data.map((fila) => parseFloat(fila.porcentaje)),
-          options: {
-            ...chartData.options,
-            labels: data.map((fila) => `Li ${fila.Li} - Ls ${fila.Ls} se encontraron ${fila.fi} personas`),
-          },
-        };
-        setChartData(newChartData);
-      } catch (error) {
-        console.error('Error fetching data:', error);
-        setLoading(false);
+  // Función para generar datos de ejemplo
+  const generateChartData = (totalPersonas) => {
+    const data = {};
+    for (let i = 1; i <= totalPersonas; i++) {
+      const category = `Categoría ${i % 5 + 1}`;
+      if (!data[category]) {
+        data[category] = 0;
       }
-    };
+      data[category]++;
+    }
+    return data;
+  };
 
-    fetchData();
-  }, []); // La dependencia vacía garantiza que se realice la llamada solo una vez al montar el componente
+  useEffect(() => {
+    const totalPersonas = 150; // Cambia esto al número deseado de personas
+
+    const generatedData = generateChartData(totalPersonas);
+
+    setApiData(generatedData);
+    setLoading(false);
+    setError(null);
+
+    // Actualizar chartData con datos generados
+    const newChartData = {
+      ...chartData,
+      series: Object.values(generatedData).map((value) => parseFloat(value)),
+      options: {
+        ...chartData.options,
+        labels: Object.keys(generatedData).map((key) => `${key}: ${generatedData[key]}`),
+      },
+    };
+    setChartData(newChartData);
+  }, [chartData]);
 
   return (
     <>
+      <NavBar />
       <div className="row">
         <div className="col-md-6 col-sm-12 mt-5">
           <div className="card text-center">
@@ -89,8 +97,18 @@ function Chart() {
           <div className="card text-center">
             <div className="card-header">Datos Obtenidos</div>
             <div className="card-body">
+              {error && <Alert variant="danger">{error}</Alert>}
               <h5 className="card-title">Datos de Ingreso:</h5>
-              <p>{apiData.map((fila) => fila.valor).join(', ')}</p>
+              <table>
+                <tbody>
+                  {Object.keys(apiData).map((key, index) => (
+                    <tr key={index}>
+                      <th>{key}</th>
+                      <td>{apiData[key]}</td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
               <div className="card-footer text-body-secondary">
                 <h5 className="card-title">Resultados Estadísticos:</h5>
                 {/* Eliminadas todas las funciones y datos de estadísticas */}

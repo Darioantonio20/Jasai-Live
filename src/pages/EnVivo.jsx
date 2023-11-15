@@ -1,4 +1,5 @@
 import NavBar from "../components/atoms/NavBar";
+import "../assets/styles/Skeleton.css";
 
 function EnVivo() {
       // Simulación de espera

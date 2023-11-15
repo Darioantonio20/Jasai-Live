@@ -3,7 +3,7 @@ import NavBar from "./NavBar";
 
 function Prueba() {
   const [loading, setLoading] = useState(true);
-  const [apiData, setApiData] = useState([]);
+  const [apiData, setApiData] = useState({});
 
   useEffect(() => {
     fetch('http://44.219.12.178:3000/stats')
@@ -33,13 +33,18 @@ function Prueba() {
         ) : (
           <div>
             <h2>Datos obtenidos de la API:</h2>
-            <pre>{JSON.stringify(apiData, null, 2)}</pre>
+            <table>
+              <tbody>
+                {Object.keys(apiData).map((key, index) => (
+                  <tr key={index}>
+                    <th>{key}</th>
+                    <td>{apiData[key]}</td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
           </div>
         )}
-        <p>hola putos</p>
-        <div>
-          Metame la pilin aquí
-        </div>
       </div>
     </>
   );

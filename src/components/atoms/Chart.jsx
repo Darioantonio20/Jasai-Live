@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import ReactApexChart from 'react-apexcharts';
 import { Alert } from 'react-bootstrap';
-import NavBar from "../../components/atoms/NavBar";
 
 function Chart() {
   const [loading, setLoading] = useState(true);
@@ -86,7 +85,6 @@ function Chart() {
 
   return (
     <>
-      <NavBar />
       <div className="row">
         <div className="col-md-6 col-sm-12 mt-5">
           <div className="card text-center">

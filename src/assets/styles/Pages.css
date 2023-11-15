@@ -725,3 +725,31 @@
   background-color: #000; /* Nuevo color de fondo al pasar el ratón */
   color: #fff; /* Nuevo color de texto al pasar el ratón */
 }
+
+/* circulo de en vivo*/
+
+/* EnVivo.css */
+.live-indicator {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+}
+
+.red-circle {
+  width: 2rem;
+  height: 2rem;
+  border-radius: 50%;
+  background-color: red;
+  margin-left: 1rem;
+  animation: pulse 1s infinite alternate;
+}
+
+@keyframes pulse {
+  from {
+    opacity: 1;
+  }
+  to {
+    opacity: 0.3;
+  }
+}

@@ -1,11 +1,12 @@
 import React, { useEffect, useState } from 'react';
 import ReactApexChart from 'react-apexcharts';
 import { Alert } from 'react-bootstrap';
-import NavBar from "../atoms/NavBar";
+import NavBar from "../../components/atoms/NavBar";
 
 function Chart() {
   const [loading, setLoading] = useState(true);
   const [apiData, setApiData] = useState([]);
+  const [totalPersons, setTotalPersons] = useState(0); // Nuevo estado para el total de personas
   const [error, setError] = useState(null);
 
   const [chartData, setChartData] = useState({
@@ -32,39 +33,56 @@ function Chart() {
     },
   });
 
-  // Función para generar datos de ejemplo
-  const generateChartData = (totalPersonas) => {
-    const data = {};
-    for (let i = 1; i <= totalPersonas; i++) {
-      const category = `Categoría ${i % 5 + 1}`;
-      if (!data[category]) {
-        data[category] = 0;
-      }
-      data[category]++;
-    }
-    return data;
-  };
+  // Estado para almacenar el dato probabilístico
+  const [randomProbability, setRandomProbability] = useState(null);
 
   useEffect(() => {
-    const totalPersonas = 150; // Cambia esto al número deseado de personas
+    // Función para obtener datos de la API
+    const fetchData = async () => {
+      try {
+        const response = await fetch('https://api.jasailive.xyz:3000/stats');
 
-    const generatedData = generateChartData(totalPersonas);
+        if (!response.ok) {
+          throw new Error('Network response was not ok');
+        }
 
-    setApiData(generatedData);
-    setLoading(false);
-    setError(null);
+        const data = await response.json();
+        setApiData(data);
+        setLoading(false);
+        setError(null);
 
-    // Actualizar chartData con datos generados
-    const newChartData = {
-      ...chartData,
-      series: Object.values(generatedData).map((value) => parseFloat(value)),
-      options: {
-        ...chartData.options,
-        labels: Object.keys(generatedData).map((key) => `${key}: ${generatedData[key]}`),
-      },
+        // Actualizar chartData con datos obtenidos
+        const newChartData = {
+          ...chartData,
+          series: Object.values(data).map((value) => parseFloat(value)),
+          options: {
+            ...chartData.options,
+            labels: Object.keys(data).map((key) => `${key}: ${data[key]}`),
+          },
+        };
+        setChartData(newChartData);
+
+        // Calcular el total de personas
+        const newTotalPersons = Object.values(data).reduce((acc, value) => acc + parseFloat(value), 0);
+
+        // Actualizar el estado solo si el total de personas cambia
+        if (newTotalPersons !== totalPersons) {
+          setTotalPersons(newTotalPersons);
+
+          // Generar un dato probabilístico basado en el total de personas
+          const randomProbabilityValue = Math.random() * newTotalPersons;
+          setRandomProbability(randomProbabilityValue);
+        }
+      } catch (error) {
+        console.error('Error fetching data:', error);
+        setLoading(false);
+        setError(error.message);
+      }
     };
-    setChartData(newChartData);
-  }, [chartData]);
+
+    // Llamar a la función para obtener datos al montar el componente
+    fetchData();
+  }, [chartData, totalPersons]);
 
   return (
     <>
@@ -135,6 +153,17 @@ function Chart() {
                   </tbody>
                 </table>
               </div>
+            </div>
+          </div>
+        </div>
+        {/* Nueva tarjeta para mostrar el dato probabilístico */}
+        <div className="col-md-6 col-sm-12 mt-5">
+          <div className="card text-center">
+            <div className="card-header">Dato Probabilístico</div>
+            <div className="card-body">
+              {randomProbability !== null && (
+                <p>Valor Probabilístico: {randomProbability}</p>
+              )}
             </div>
           </div>
         </div>

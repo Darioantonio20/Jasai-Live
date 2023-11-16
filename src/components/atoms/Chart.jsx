@@ -8,33 +8,7 @@ function Chart() {
   const [totalPersons, setTotalPersons] = useState(0);
   const [error, setError] = useState(null);
 
-  const [chartData, setChartData] = useState({
-    series: [],
-    options: {
-      chart: {
-        width: 380,
-        type: 'pie',
-      },
-      labels: [],
-      responsive: [
-        {
-          breakpoint: 480,
-          options: {
-            chart: {
-              width: 200,
-            },
-            legend: {
-              position: 'bottom',
-            },
-          },
-        },
-      ],
-    },
-  });
-
-  const [randomProbability, setRandomProbability] = useState(null);
   useEffect(() => {
-    
     const fetchData = async () => {
       try {
         const response = await fetch('https://api.jasailive.xyz:3000/stats');
@@ -48,21 +22,10 @@ function Chart() {
         setLoading(false);
         setError(null);
 
-        const newChartData = {
-          ...chartData,
-          series: Object.values(data).map((value) => parseFloat(value)),
-          options: {
-            ...chartData.options,
-            labels: Object.keys(data).map((key) => `${key}: ${data[key]}`),
-          },
-        };
-        setChartData(newChartData);
         const newTotalPersons = Object.values(data).reduce((acc, value) => acc + parseFloat(value), 0);
-        
+
         if (newTotalPersons !== totalPersons) {
           setTotalPersons(newTotalPersons);
-          const randomProbabilityValue = Math.random() * newTotalPersons;
-          setRandomProbability(randomProbabilityValue);
         }
       } catch (error) {
         console.error('Error fetching data:', error);
@@ -72,29 +35,66 @@ function Chart() {
     };
 
     fetchData();
-  }, [chartData, totalPersons]);
+  }, [totalPersons]);
+
+  // Preparación de datos para el gráfico de líneas
+  const tiempoEnvio = Object.keys(apiData); // Valores de tiempo_envio para el eje X
+  const totalPersonas = Object.values(apiData).map((value) => parseFloat(value)); // Valores de total_personas para el eje Y
+
+  const chartData = {
+    series: [{
+      name: 'Total de personas',
+      data: totalPersonas,
+    }],
+    options: {
+      chart: {
+        height: 350,
+        type: 'line',
+        zoom: {
+          enabled: false
+        }
+      },
+      dataLabels: {
+        enabled: false
+      },
+      stroke: {
+        curve: 'straight'
+      },
+      title: {
+        text: 'Total de Personas por Tiempo de Envío',
+        align: 'left'
+      },
+      xaxis: {
+        categories: tiempoEnvio, // Valores de tiempo_envio para el eje X
+        title: {
+          text: 'Tiempo de Envío',
+        },
+      },
+      yaxis: {
+        title: {
+          text: 'Total de Personas',
+        },
+      },
+      grid: {
+        row: {
+          colors: ['#f3f3f3', 'transparent'],
+          opacity: 0.5
+        },
+      },
+    },
+  };
 
   return (
     <>
       <div className="row">
         <div className="col-md-6 col-sm-12 mt-5">
           <div className="card text-center">
-            <div className="card-header">Gráfica de pastel</div>
+            <div className="card-header">Gráfico de líneas</div>
             <div className="card-body">
               <div className="text-center">
-                {loading ? (
-                  <div className="cardcititita d-flex justify-content-center align-items-center">
-                    <div className="cardcititita_skeleton cardcititita_title"></div>
-                  </div>
-                ) : (
-                  <div id="chart">
-                    <ReactApexChart
-                      options={chartData.options}
-                      series={chartData.series}
-                      type="pie"
-                    />
-                  </div>
-                )}
+                <div id="chart">
+                  <ReactApexChart options={chartData.options} series={chartData.series} type="line" height={350} />
+                </div>
               </div>
             </div>
             <div className="card-footer text-body-secondary">Datos del afore del concierto</div>
@@ -117,18 +117,8 @@ function Chart() {
                 </tbody>
               </table>
               <div className="card-footer text-body-secondary">
-                <h5 className="card-title">Resultados Estadísticos:</h5>
+                <h5 className="card-title">Jasai-Live</h5>
               </div>
-            </div>
-          </div>
-        </div>
-        <div className="col-md-6 col-sm-12 mt-5">
-          <div className="card text-center">
-            <div className="card-header">Dato Probabilístico</div>
-            <div className="card-body">
-              {randomProbability !== null && (
-                <p>Valor Probabilístico: {randomProbability}</p>
-              )}
             </div>
           </div>
         </div>

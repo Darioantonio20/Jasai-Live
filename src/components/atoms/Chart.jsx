@@ -1,11 +1,11 @@
 import React, { useEffect, useState } from 'react';
-import ReactApexChart from 'react-apexcharts';
 import { Alert } from 'react-bootstrap';
+import ReactApexChart from 'react-apexcharts';
 
 function Chart() {
   const [loading, setLoading] = useState(true);
   const [apiData, setApiData] = useState([]);
-  const [totalPersons, setTotalPersons] = useState(0); // Nuevo estado para el total de personas
+  const [totalPersons, setTotalPersons] = useState(0);
   const [error, setError] = useState(null);
 
   const [chartData, setChartData] = useState({
@@ -32,11 +32,9 @@ function Chart() {
     },
   });
 
-  // Estado para almacenar el dato probabilístico
   const [randomProbability, setRandomProbability] = useState(null);
-
   useEffect(() => {
-    // Función para obtener datos de la API
+    
     const fetchData = async () => {
       try {
         const response = await fetch('https://api.jasailive.xyz:3000/stats');
@@ -50,7 +48,6 @@ function Chart() {
         setLoading(false);
         setError(null);
 
-        // Actualizar chartData con datos obtenidos
         const newChartData = {
           ...chartData,
           series: Object.values(data).map((value) => parseFloat(value)),
@@ -60,15 +57,10 @@ function Chart() {
           },
         };
         setChartData(newChartData);
-
-        // Calcular el total de personas
         const newTotalPersons = Object.values(data).reduce((acc, value) => acc + parseFloat(value), 0);
-
-        // Actualizar el estado solo si el total de personas cambia
+        
         if (newTotalPersons !== totalPersons) {
           setTotalPersons(newTotalPersons);
-
-          // Generar un dato probabilístico basado en el total de personas
           const randomProbabilityValue = Math.random() * newTotalPersons;
           setRandomProbability(randomProbabilityValue);
         }
@@ -79,7 +71,6 @@ function Chart() {
       }
     };
 
-    // Llamar a la función para obtener datos al montar el componente
     fetchData();
   }, [chartData, totalPersons]);
 
@@ -127,34 +118,10 @@ function Chart() {
               </table>
               <div className="card-footer text-body-secondary">
                 <h5 className="card-title">Resultados Estadísticos:</h5>
-                {/* Eliminadas todas las funciones y datos de estadísticas */}
-              </div>
-            </div>
-            <div className="card-footer text-body-secondary">
-              <div className="table-responsive">
-                <table className="table">
-                  <thead>
-                    <tr>
-                      <th>Li</th>
-                      <th>Ls</th>
-                      <th>x</th>
-                      <th>fi</th>
-                      <th>fr</th>
-                      <th>Porcentaje (%)</th>
-                      <th>F</th>
-                      <th>fx</th>
-                      <th>fx²</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    {/* Eliminadas las filas de la tabla de frecuencias */}
-                  </tbody>
-                </table>
               </div>
             </div>
           </div>
         </div>
-        {/* Nueva tarjeta para mostrar el dato probabilístico */}
         <div className="col-md-6 col-sm-12 mt-5">
           <div className="card text-center">
             <div className="card-header">Dato Probabilístico</div>

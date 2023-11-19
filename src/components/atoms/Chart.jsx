@@ -3,43 +3,54 @@ import { Alert } from 'react-bootstrap';
 import ReactApexChart from 'react-apexcharts';
 
 function Chart() {
-  const [loading, setLoading] = useState(true);
-  const [apiData, setApiData] = useState([]);
-  const [totalPersons, setTotalPersons] = useState(0);
-  const [error, setError] = useState(null);
+  const [tiempoEnvio, setTiempoEnvio] = useState([]);
+  const [totalPersonas, setTotalPersonas] = useState([]);
+  const [maxPersons, setMaxPersons] = useState(3047);
+  const [maxPersonsInterval, setMaxPersonsInterval] = useState('');
+  const [intervalWithMaxPersons, setIntervalWithMaxPersons] = useState('');
 
   useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const response = await fetch('https://api.jasailive.xyz:3000/stats');
+    const generateStaticData = () => {
+      const tiempoEnvioData = [];
+      const totalPersonasData = [];
+      const intervalPersonCounts = {};
 
-        if (!response.ok) {
-          throw new Error('Network response was not ok');
+      let maxPersonsValue = 0;
+      let maxPersonsTime = '';
+      let maxIntervalCount = 0;
+      let intervalWithMaxCount = '';
+
+      for (let i = 0; i <= 120; i += 10) {
+        tiempoEnvioData.push(`${i}m`);
+        const randomValue = Math.floor(Math.random() * (500 - 50 + 1)) + 50;
+
+        if (randomValue > maxPersonsValue) {
+          maxPersonsValue = randomValue;
+          maxPersonsTime = `${i}m`;
         }
 
-        const data = await response.json();
-        setApiData(data);
-        setLoading(false);
-        setError(null);
+        totalPersonasData.push(randomValue > maxPersons ? maxPersons : randomValue);
 
-        const newTotalPersons = Object.values(data).reduce((acc, value) => acc + parseFloat(value), 0);
-
-        if (newTotalPersons !== totalPersons) {
-          setTotalPersons(newTotalPersons);
+        if (!intervalPersonCounts[`${i}m`]) {
+          intervalPersonCounts[`${i}m`] = 0;
         }
-      } catch (error) {
-        console.error('Error fetching data:', error);
-        setLoading(false);
-        setError(error.message);
+
+        intervalPersonCounts[`${i}m`] += randomValue;
+
+        if (intervalPersonCounts[`${i}m`] > maxIntervalCount) {
+          maxIntervalCount = intervalPersonCounts[`${i}m`];
+          intervalWithMaxCount = `${i}m`;
+        }
       }
+
+      setMaxPersonsInterval(maxPersonsTime);
+      setIntervalWithMaxPersons(intervalWithMaxCount);
+      setTiempoEnvio(tiempoEnvioData);
+      setTotalPersonas(totalPersonasData);
     };
 
-    fetchData();
-  }, [totalPersons]);
-
-  // Preparación de datos para el gráfico de líneas
-  const tiempoEnvio = Object.keys(apiData); // Valores de tiempo_envio para el eje X
-  const totalPersonas = Object.values(apiData).map((value) => parseFloat(value)); // Valores de total_personas para el eje Y
+    generateStaticData();
+  }, [maxPersons]);
 
   const chartData = {
     series: [{
@@ -65,12 +76,15 @@ function Chart() {
         align: 'left'
       },
       xaxis: {
-        categories: tiempoEnvio, // Valores de tiempo_envio para el eje X
+        categories: tiempoEnvio,
         title: {
-          text: 'Tiempo de Envío',
+          text: 'Tiempo transcurrido',
         },
       },
       yaxis: {
+        min: 0,
+        max: maxPersons,
+        tickAmount: 10,
         title: {
           text: 'Total de Personas',
         },
@@ -104,18 +118,22 @@ function Chart() {
           <div className="card text-center">
             <div className="card-header">Datos Obtenidos</div>
             <div className="card-body">
-              {error && <Alert variant="danger">{error}</Alert>}
+              <Alert variant="info">Datos generados estáticamente</Alert>
               <h5 className="card-title">Datos de Ingreso:</h5>
               <table>
                 <tbody>
-                  {Object.keys(apiData).map((key, index) => (
-                    <tr key={index}>
-                      <th>{key}</th>
-                      <td>{apiData[key]}</td>
-                    </tr>
-                  ))}
+                  <tr>
+                    <th>Total de Personas</th>
+                    <td>{totalPersonas.join(', ')}</td>
+                  </tr><br></br>
+                  <tr>
+                    <th>Intervalo con más personas</th>
+                    <td>{maxPersonsInterval}</td>
+                  </tr><br></br>
                 </tbody>
               </table>
+              <h2>Total de personas: 300</h2>
+              <h2>Tiempo transcurrido: 2 horas</h2>
               <div className="card-footer text-body-secondary">
                 <h5 className="card-title">Jasai-Live</h5>
               </div>

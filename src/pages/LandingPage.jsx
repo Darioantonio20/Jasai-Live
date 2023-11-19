@@ -5,6 +5,7 @@ import Carrousel from "../components/molecules/Carrousel";
 import Section2 from "../components/molecules/Section2";
 import Section3 from "../components/molecules/Section3";
 import Section4 from "../components/molecules/Section4";
+import CompraBoletos from "./CompraBoletos";
 
 function LandingPage() {
     return ( 
@@ -14,6 +15,7 @@ function LandingPage() {
            <Section2/>
            <Section3/>
            <Section4/>
+           <CompraBoletos/>
            <AboutUs/>
            <Footer/>
         </>

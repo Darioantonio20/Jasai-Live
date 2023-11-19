@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import NavBar from "../components/atoms/NavBar";
 import IconoBlancoBoleto from "../assets/img/formaboletoBlanco.svg";
-import imgBoleto from "../assets/img/ImgBoleto2.png";
+import imgBoleto from "../assets/img/conciertoBoleto.jpeg";
 import "../assets/styles/Progress.css";
 import axios from 'axios';
 
@@ -11,7 +11,7 @@ const ProductListPage = () => {
 
   useEffect(() => {
     setTimeout(() => {
-      axios.get('http://localhost:5000/api/products')
+      axios.get('http://localhost:5001/api/products')
         .then((response) => {
           setProducts(response.data);
           setIsLoading(false);
@@ -24,7 +24,7 @@ const ProductListPage = () => {
   }, []);
 
   const addToCart = (product) => {
-    axios.post('http://localhost:5000/api/add-to-cart', product)
+    axios.post('http://localhost:5001/api/add-to-cart', product)
       .then((response) => {
         console.log(response.data.message);
       })

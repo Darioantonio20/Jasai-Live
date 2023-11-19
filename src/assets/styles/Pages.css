@@ -753,3 +753,23 @@
     opacity: 0.3;
   }
 }
+/*textito*/
+.animation {
+  font-size: 3rem;
+  font-weight: bold;
+  color: #000000; /* Color inicial */
+  overflow: hidden;
+  white-space: nowrap;
+  border-right: 3px solid transparent;
+  animation: typing-erasing 15s infinite;
+}
+
+/* Animación de escritura y borrado */
+@keyframes typing-erasing {
+  0%, 50% {
+    width: 0;
+  }
+  5%, 55% {
+    width: 100%;
+  }
+}

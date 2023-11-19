@@ -8,7 +8,7 @@ function CuentaUsuario() {
 
   useEffect(() => {
     // Obtiene los productos del carrito al cargar la página
-    axios.get('http://localhost:5000/api/cart')
+    axios.get('http://localhost:5001/api/cart')
       .then((response) => {
         setCart(response.data);
       })
@@ -28,10 +28,10 @@ function CuentaUsuario() {
       <div className='container mt-5'>
         <div className="card text-center">
           <div className="card-header">
-            Mi carrito
+            <h1 className="card-title">Carrito</h1>
           </div>
           <div className="card-body">
-            <h1 className="card-title">Carrito</h1>
+            
             <div className="cart">
               {tableItems.map((item, index) => (
                 <p key={index}>{item.id}{" " + item.nombreEvento}</p>
@@ -39,7 +39,7 @@ function CuentaUsuario() {
             </div>
           </div>
           <div className="card-footer text-body-secondary">
-            Jasai-Live
+            ---
           </div>
         </div>
         <div className="table-responsive mt-4">

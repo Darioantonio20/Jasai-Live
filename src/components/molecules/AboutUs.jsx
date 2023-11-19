@@ -43,7 +43,7 @@ function AboutUs() {
 
   return ( 
     <>
-      <h4 className="font-weight-bold text-center mb-5 mt-5">Equipo de desarrollo</h4>
+      <div class="animation text-center mb-5 mt-5" data-text="Equipo de desarrollo">Equipo de desarrollo</div>
       <div className="row">
         {personas.map((persona, index) => (
           <div className="col-md-3 d-flex justify-content-center" key={index}>

@@ -33,10 +33,10 @@ function EnVivo() {
                   </div>
                 </div>
                 <div className="card-body p-5 text-center">
-                  Hola Timmy
-                  {/*<div className="cardcitaVideo d-flex justify-content-center align-items-center">
+                  {/*Simula la carca del en vivo*/}
+                  <div className="cardcitaVideo d-flex justify-content-center align-items-center">
                     <div className="cardcitaVideo__skeleton cardcitaVideo__title"></div>
-                  </div>*/}
+                  </div>
                 </div>
               </div>
             </div>

@@ -8,7 +8,7 @@ function Section2() {
         <div className="container-fluid mt-5">
             <div className="row">
                 <div className="col-sm-12 col-md-6 p-5">
-                    <h2 className="tituloSection2">Bienvenidos a Jasai-Live</h2>
+                    <div class="animation text-center mb-5 mt-5" data-text="Bienvenidos a Jasai-Live">Bienvenidos a Jasai-Live</div>
                     <p className="parrafoSection2">El acceso a los mejores conciertos, a un clic de distancia.</p>
                     <div className="text-center">
                         <img className="img-fluid" src={IconoSection2}></img>

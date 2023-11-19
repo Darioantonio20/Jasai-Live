@@ -16,7 +16,7 @@ function Section4() {
         <div id="carouselExample" className="carousel slide">
             <div className="carousel-inner">
                 <div className="container-fluid align">
-                    <h2 className="TituloSection4 mb-5 mt-5">Explorar más eventos</h2>
+                    <div class="animation text-center mb-5 mt-5" data-text="Explorar más eventos">Explorar más eventos</div>
                     <div className="carousel-item active">
                         <div className="row justify-content-center row-cols-1 row-cols-md-3 g-4">
                             <div className="col">

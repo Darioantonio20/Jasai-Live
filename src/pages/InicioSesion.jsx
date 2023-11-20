@@ -1,7 +1,7 @@
 import { useNavigate, Link } from 'react-router-dom';
 import React, { useState, useRef, useContext } from 'react';
 import Swal from 'sweetalert2';
-import ContextoDeUsuario from "../context/ContextoDeUsuario"; // Importa el contexto
+import ContextoDeUsuario from "../context/ContextoDeUsuario";
 import NavBar from "../components/atoms/NavBar";
 import ImgLoginRegisterFondo from "../assets/img/imgLoginRegister.png";
 
@@ -10,7 +10,6 @@ const InicioSesion = () => {
     const navigate = useNavigate();
     const { setUserContext } = useContext(ContextoDeUsuario);
 
-    // Credenciales del administrador
     const usuarioAdmin = 'AdminJasaiLive';
     const contrasenaAdmin = 'JasaiLive';
 
@@ -26,7 +25,6 @@ const InicioSesion = () => {
                 text: 'Rellena todos los campos',
             });
         } else if (Correo === usuarioAdmin && Contrasena === contrasenaAdmin) {
-            // El usuario ha iniciado sesión como administrador
             Swal.fire({
                 icon: 'success',
                 text: `Bienvenido ${Correo}`,
@@ -34,11 +32,10 @@ const InicioSesion = () => {
                 showConfirmButton: false,
             }).then(() => {
                 navigate("/admin");
-                // Establecer el usuario en el contexto (cambiar el rol si es necesario)
                 setUserContext({ tipo: "Administrador" });
             });
         } else {
-            fetch(`http://127.0.0.1:3000/usuarios/${Correo}/${Contrasena}`)
+            fetch(`https://usuarios.jasailive.xyz:3000/usuarios/${Correo}/${Contrasena}`)
                 .then(response => response.json())
                 .then(data => {
                     if (data.message === 'Contraseña incorrecta') {
@@ -58,14 +55,11 @@ const InicioSesion = () => {
                             timer: 3000,
                             showConfirmButton: false,
                         }).then(() => {
-                            // Verifica el rol del usuario y redirige a la vista correspondiente
                             if (data.rol === 'administrador') {
                                 navigate("/admin");
-                                // Establecer el usuario en el contexto (cambiar el rol si es necesario)
                                 setUserContext({ tipo: "Administrador" });
                             } else {
                                 navigate("/usuario");
-                                // Establecer el usuario en el contexto
                                 setUserContext({ tipo: "Usuario" });
                             }
                         });

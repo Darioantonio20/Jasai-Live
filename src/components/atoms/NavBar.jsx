@@ -1,10 +1,11 @@
 import { Link } from "react-router-dom";
-//import { useContext, useEffect } from "react";
-//import ContextoDeUsuario from "../../context/ContextoDeUsuario";
+import React, { useContext } from "react";
+import ContextoDeUsuario from "../../context/ContextoDeUsuario";
 import ImgJasaiLogo from "../../assets/img/jasaiLogo.png";
-
 function NavBar() {
-    //const { userContext, setUserContext } = useContext(ContextoDeUsuario);
+    const { userContext } = useContext(ContextoDeUsuario);
+
+    const usuario = userContext.tipo;
 
     return (
         <>
@@ -26,31 +27,41 @@ function NavBar() {
                                     Inicio
                                 </Link>
                             </li>
-                            <li className="nav-item m-2">
-                                <Link to="/visualizacionBoletos" className="nav-link" href="#">
-                                    Eventos
-                                </Link>
-                            </li>
-                            <li className="nav-item m-2">
-                                <Link to="/inicioSesion" className="nav-link" href="#">
-                                    Inicio de sesión
-                                </Link>
-                            </li>
-                            <li className="nav-item m-2">
-                                <Link to="/usuario" className="nav-link" href="#">
-                                    Cuenta de Usuario
-                                </Link>
-                            </li>
-                            <li className="nav-item m-2">
-                                <Link to="/enVivo" className="nav-link" href="#">
-                                    ¡En vivo!
-                                </Link>
-                            </li>
-                            <li className="nav-item m-2">
-                                <Link to="/admin" className="nav-link" href="#">
-                                    Cuenta de Admin
-                                </Link>
-                            </li>
+                            {usuario === "Administrador" && (
+                                <li className="nav-item m-2">
+                                    <Link to="/admin" className="nav-link" href="#">
+                                        Cuenta de Admin
+                                    </Link>
+                                </li>
+                            )}
+                            {usuario === "Usuario" && (
+                                <>
+                                    <li className="nav-item m-2">
+                                        <Link to="/usuario" className="nav-link" href="#">
+                                            Cuenta de Usuario
+                                        </Link>
+                                    </li>
+                                    <li className="nav-item m-2">
+                                        <Link to="/visualizacionBoletos" className="nav-link" href="#">
+                                            Eventos
+                                        </Link>
+                                    </li>
+                                    <li className="nav-item m-2">
+                                        <Link to="/enVivo" className="nav-link" href="#">
+                                            ¡En vivo!
+                                        </Link>
+                                    </li>
+                                </>
+                            )}
+                            {!usuario && (
+                                <>
+                                    <li className="nav-item m-2">
+                                        <Link to="/inicioSesion" className="nav-link" href="#">
+                                            Inicio de sesión
+                                        </Link>
+                                    </li>
+                                </>
+                            )}
                         </ul>
                     </div>
                 </div>

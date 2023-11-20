@@ -132,8 +132,44 @@ function Chart() {
                   </tr><br></br>
                 </tbody>
               </table>
-              <h2>Total de personas: 300</h2>
-              <h2>Tiempo transcurrido: 2 horas</h2>
+              <table class="table">
+                <thead class="thead-dark">
+                  <tr>
+                    <th scope="col">No° conciertos</th>
+                    <th scope="col">Tiempo con más peronas</th>
+                    <th scope="col">Probabilidad</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <th scope="row">1</th>
+                    <td>minutos</td>
+                    <td>%</td>
+                  </tr>
+                  <tr>
+                    <th scope="row">2</th>
+                    <td>minutos</td>
+                    <td>%</td>
+                  </tr>
+                  <tr>
+                    <th scope="row">3</th>
+                    <td>minutos</td>
+                    <td>%</td>
+                  </tr>
+                </tbody>
+              </table>
+              <table class="table table-striped table-dark">
+                <thead>
+                  <tr>
+                    <th scope="col">Estadistica para el 4° concierto</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <th scope="row">%</th>
+                  </tr>
+                </tbody>
+              </table>
               <div className="card-footer text-body-secondary">
                 <h5 className="card-title">Jasai-Live</h5>
               </div>

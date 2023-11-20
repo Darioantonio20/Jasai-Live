@@ -16,7 +16,7 @@ const ProductListPage = () => {
 
   useEffect(() => {
     setTimeout(() => {
-      axios.get('http://localhost:5001/api/products')
+      axios.get('http://jasailive.xyz:5001/api/products')
         .then((response) => {
           setProducts(response.data);
           setIsLoading(false);
@@ -40,7 +40,7 @@ const ProductListPage = () => {
         timer: 2000,
       });
     } else {
-      axios.post('http://localhost:5001/api/add-to-cart', product)
+      axios.post('http://jasailive.xyz:5001/api/add-to-cart', product)
         .then((response) => {
           Swal.fire({
             icon: 'success',

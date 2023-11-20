@@ -8,7 +8,7 @@ function CuentaUsuario() {
 
   useEffect(() => {
     // Obtiene los productos del carrito al cargar la página
-    axios.get('http://localhost:5001/api/cart')
+    axios.get('http://jasailive.xyz:5001/api/cart')
       .then((response) => {
         setCart(response.data);
       })

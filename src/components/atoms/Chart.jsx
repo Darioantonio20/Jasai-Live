@@ -5,9 +5,10 @@ import ReactApexChart from 'react-apexcharts';
 function Chart() {
   const [tiempoEnvio, setTiempoEnvio] = useState([]);
   const [totalPersonas, setTotalPersonas] = useState([]);
-  const [maxPersons, setMaxPersons] = useState(3047);
+  const [maxPersons, setMaxPersons] = useState(300);
   const [maxPersonsInterval, setMaxPersonsInterval] = useState('');
   const [intervalWithMaxPersons, setIntervalWithMaxPersons] = useState('');
+  const [maxIntervalCount, setMaxIntervalCount] = useState(0);
 
   useEffect(() => {
     const generateStaticData = () => {
@@ -17,12 +18,10 @@ function Chart() {
 
       let maxPersonsValue = 0;
       let maxPersonsTime = '';
-      let maxIntervalCount = 0;
-      let intervalWithMaxCount = '';
 
-      for (let i = 0; i <= 120; i += 10) {
+      for (let i = 0; i <= 120; i += 20) {
         tiempoEnvioData.push(`${i}m`);
-        const randomValue = Math.floor(Math.random() * (500 - 50 + 1)) + 50;
+        const randomValue = Math.floor(Math.random() * ((i <= 20 ? 20 : 300) / 30 + 1)) * 30;
 
         if (randomValue > maxPersonsValue) {
           maxPersonsValue = randomValue;
@@ -38,19 +37,23 @@ function Chart() {
         intervalPersonCounts[`${i}m`] += randomValue;
 
         if (intervalPersonCounts[`${i}m`] > maxIntervalCount) {
-          maxIntervalCount = intervalPersonCounts[`${i}m`];
-          intervalWithMaxCount = `${i}m`;
+          setMaxIntervalCount(intervalPersonCounts[`${i}m`]);
+          setIntervalWithMaxPersons(`${i}m`);
         }
       }
 
       setMaxPersonsInterval(maxPersonsTime);
-      setIntervalWithMaxPersons(intervalWithMaxCount);
       setTiempoEnvio(tiempoEnvioData);
       setTotalPersonas(totalPersonasData);
     };
 
     generateStaticData();
-  }, [maxPersons]);
+  }, [maxPersons, maxIntervalCount]);
+
+const calculateProbability = () => {
+  const occurrences = totalPersonas.filter(personas => personas === maxIntervalCount).length;
+  return ((occurrences / tiempoEnvio.length) * 100).toFixed(2);
+};
 
   const chartData = {
     series: [{
@@ -72,13 +75,13 @@ function Chart() {
         curve: 'straight'
       },
       title: {
-        text: 'Total de Personas por Tiempo de Envío',
-        align: 'left'
+        text: 'Aforo Jasai-Live',
+        align: 'center'
       },
       xaxis: {
         categories: tiempoEnvio,
         title: {
-          text: 'Tiempo transcurrido',
+          text: 'Tiempo transcurrido(minutos)',
         },
       },
       yaxis: {
@@ -86,7 +89,7 @@ function Chart() {
         max: maxPersons,
         tickAmount: 10,
         title: {
-          text: 'Total de Personas',
+          text: 'Personas(aproximado)',
         },
       },
       grid: {
@@ -97,6 +100,7 @@ function Chart() {
       },
     },
   };
+
 
   return (
     <>
@@ -125,26 +129,26 @@ function Chart() {
                   <tr>
                     <th>Total de Personas</th>
                     <td>{totalPersonas.join(', ')}</td>
-                  </tr><br></br>
+                  </tr>
                   <tr>
                     <th>Intervalo con más personas</th>
                     <td>{maxPersonsInterval}</td>
-                  </tr><br></br>
+                  </tr>
                 </tbody>
               </table>
-              <table class="table">
-                <thead class="thead-dark">
+              <table className="table">
+                <thead className="thead-dark">
                   <tr>
                     <th scope="col">No° conciertos</th>
-                    <th scope="col">Tiempo con más peronas</th>
+                    <th scope="col">Tiempo con más personas</th>
                     <th scope="col">Probabilidad</th>
                   </tr>
                 </thead>
                 <tbody>
                   <tr>
                     <th scope="row">1</th>
-                    <td>minutos</td>
-                    <td>%</td>
+                    <td>{maxPersonsInterval}</td>
+                    <td>{calculateProbability()}%</td>
                   </tr>
                   <tr>
                     <th scope="row">2</th>
@@ -158,7 +162,7 @@ function Chart() {
                   </tr>
                 </tbody>
               </table>
-              <table class="table table-striped table-dark">
+              <table className="table table-striped table-dark">
                 <thead>
                   <tr>
                     <th scope="col">Estadistica para el 4° concierto</th>

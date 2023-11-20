@@ -50,11 +50,22 @@ function Chart() {
     generateStaticData();
   }, [maxPersons, maxIntervalCount]);
 
-const calculateProbability = () => {
-  const occurrences = totalPersonas.filter(personas => personas === maxIntervalCount).length;
-  return ((occurrences / tiempoEnvio.length) * 100).toFixed(2);
-};
-
+  const calculateProbability = () => {
+    // Contar las ocurrencias del intervalo con más personas
+    const occurrences = totalPersonas.filter(personas => personas === maxIntervalCount).length;
+  
+    // Contar el número total de ocurrencias en los datos generados
+    const totalOccurrences = totalPersonas.length;
+  
+    // Verificar si hay ocurrencias en el intervalo y en el conteo general
+    if (occurrences === 0 || totalOccurrences === 0) {
+      return 0; // Manejar la situación donde no hay ocurrencias
+    }
+  
+    // Calcular la probabilidad como el porcentaje de ocurrencias del intervalo con más personas
+    return ((occurrences / totalOccurrences) * 100).toFixed(2);
+  };
+  
   const chartData = {
     series: [{
       name: 'Total de personas',

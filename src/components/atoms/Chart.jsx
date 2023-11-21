@@ -11,6 +11,8 @@ function Chart() {
   const [chartDataList, setChartDataList] = useState([]);
   const [showChart, setShowChart] = useState(false);
   const [currentIteration, setCurrentIteration] = useState(0);
+  const [averageProbability, setAverageProbability] = useState(0);
+  const [expectedMinute, setExpectedMinute] = useState(0);
 
   useEffect(() => {
     const generateStaticData = () => {
@@ -48,6 +50,7 @@ function Chart() {
         maxPersonsInterval: maxPersonsTime,
         totalPersonas: totalPersonasData,
         probability: calculateProbability(),
+        minute: maxPersonsTime.split('m')[0],
       };
 
       setChartDataList(prevList => [...prevList, newData]);
@@ -66,6 +69,20 @@ function Chart() {
       setShowChart(true);
     }
   }, [maxPersons, maxIntervalCount, showChart, currentIteration]);
+
+  useEffect(() => {
+    if (chartDataList.length === 3) {
+      const probabilities = chartDataList.map(data => parseFloat(data.probability));
+      const avgProbability = probabilities.reduce((acc, val) => acc + val, 0) / 3;
+      setAverageProbability(avgProbability.toFixed(2));
+
+      const expectedMinuteValue = chartDataList.reduce((acc, data) => {
+        return acc + data.minute * (parseFloat(data.probability) / 100);
+      }, 0);
+
+      setExpectedMinute(Math.round(expectedMinuteValue));
+    }
+  }, [chartDataList]);
 
   const calculateProbability = () => {
     const occurrences = totalPersonas.filter(personas => personas === maxIntervalCount).length;
@@ -168,12 +185,13 @@ function Chart() {
                 <table className="table table-striped table-dark">
                   <thead>
                     <tr>
-                      <th scope="col">Estadistica para el 4° concierto</th>
+                      <th scope="col">Estadística para el 4° concierto</th>
                     </tr>
                   </thead>
                   <tbody>
                     <tr>
-                      <th scope="row">%</th>
+                      <th scope="row">Minuto: {expectedMinute}</th>
+                      <td>{averageProbability}%</td>
                     </tr>
                   </tbody>
                 </table>

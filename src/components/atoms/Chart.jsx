@@ -7,8 +7,10 @@ function Chart() {
   const [totalPersonas, setTotalPersonas] = useState([]);
   const [maxPersons, setMaxPersons] = useState(300);
   const [maxPersonsInterval, setMaxPersonsInterval] = useState('');
-  const [intervalWithMaxPersons, setIntervalWithMaxPersons] = useState('');
   const [maxIntervalCount, setMaxIntervalCount] = useState(0);
+  const [chartDataList, setChartDataList] = useState([]);
+  const [showChart, setShowChart] = useState(false);
+  const [currentIteration, setCurrentIteration] = useState(0);
 
   useEffect(() => {
     const generateStaticData = () => {
@@ -38,34 +40,44 @@ function Chart() {
 
         if (intervalPersonCounts[`${i}m`] > maxIntervalCount) {
           setMaxIntervalCount(intervalPersonCounts[`${i}m`]);
-          setIntervalWithMaxPersons(`${i}m`);
+          setMaxPersonsInterval(`${i}m`);
         }
       }
 
-      setMaxPersonsInterval(maxPersonsTime);
+      const newData = {
+        maxPersonsInterval: maxPersonsTime,
+        totalPersonas: totalPersonasData,
+        probability: calculateProbability(),
+      };
+
+      setChartDataList(prevList => [...prevList, newData]);
       setTiempoEnvio(tiempoEnvioData);
       setTotalPersonas(totalPersonasData);
     };
 
-    generateStaticData();
-  }, [maxPersons, maxIntervalCount]);
+    if (showChart && currentIteration < 3) {
+      setTimeout(() => {
+        generateStaticData();
+        setCurrentIteration(currentIteration + 1);
+      }, 10000);
+    }
+
+    if (!showChart) {
+      setShowChart(true);
+    }
+  }, [maxPersons, maxIntervalCount, showChart, currentIteration]);
 
   const calculateProbability = () => {
-    // Contar las ocurrencias del intervalo con más personas
     const occurrences = totalPersonas.filter(personas => personas === maxIntervalCount).length;
-  
-    // Contar el número total de ocurrencias en los datos generados
     const totalOccurrences = totalPersonas.length;
-  
-    // Verificar si hay ocurrencias en el intervalo y en el conteo general
+
     if (occurrences === 0 || totalOccurrences === 0) {
-      return 0; // Manejar la situación donde no hay ocurrencias
+      return 0;
     }
-  
-    // Calcular la probabilidad como el porcentaje de ocurrencias del intervalo con más personas
+
     return ((occurrences / totalOccurrences) * 100).toFixed(2);
   };
-  
+
   const chartData = {
     series: [{
       name: 'Total de personas',
@@ -112,7 +124,6 @@ function Chart() {
     },
   };
 
-
   return (
     <>
       <div className="row">
@@ -122,11 +133,11 @@ function Chart() {
             <div className="card-body">
               <div className="text-center">
                 <div id="chart">
-                  <ReactApexChart options={chartData.options} series={chartData.series} type="line" height={350} />
+                  {showChart && <ReactApexChart options={chartData.options} series={chartData.series} type="line" height={350} />}
                 </div>
               </div>
             </div>
-            <div className="card-footer text-body-secondary">Datos del afore del concierto</div>
+            <div className="card-footer text-body-secondary">Datos del aforo del concierto</div>
           </div>
         </div>
         <div className="col-md-6 col-sm-12 mt-5">
@@ -135,18 +146,6 @@ function Chart() {
             <div className="card-body">
               <Alert variant="info">Datos generados estáticamente</Alert>
               <h5 className="card-title">Datos de Ingreso:</h5>
-              <table>
-                <tbody>
-                  <tr>
-                    <th>Total de Personas</th>
-                    <td>{totalPersonas.join(', ')}</td>
-                  </tr>
-                  <tr>
-                    <th>Intervalo con más personas</th>
-                    <td>{maxPersonsInterval}</td>
-                  </tr>
-                </tbody>
-              </table>
               <table className="table">
                 <thead className="thead-dark">
                   <tr>
@@ -156,35 +155,29 @@ function Chart() {
                   </tr>
                 </thead>
                 <tbody>
-                  <tr>
-                    <th scope="row">1</th>
-                    <td>{maxPersonsInterval}</td>
-                    <td>{calculateProbability()}%</td>
-                  </tr>
-                  <tr>
-                    <th scope="row">2</th>
-                    <td>minutos</td>
-                    <td>%</td>
-                  </tr>
-                  <tr>
-                    <th scope="row">3</th>
-                    <td>minutos</td>
-                    <td>%</td>
-                  </tr>
+                  {chartDataList.map((data, index) => (
+                    <tr key={index + 1}>
+                      <th scope="row">{index + 1}</th>
+                      <td>{data.maxPersonsInterval}</td>
+                      <td>{data.probability}%</td>
+                    </tr>
+                  ))}
                 </tbody>
               </table>
-              <table className="table table-striped table-dark">
-                <thead>
-                  <tr>
-                    <th scope="col">Estadistica para el 4° concierto</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr>
-                    <th scope="row">%</th>
-                  </tr>
-                </tbody>
-              </table>
+              {currentIteration === 3 && (
+                <table className="table table-striped table-dark">
+                  <thead>
+                    <tr>
+                      <th scope="col">Estadistica para el 4° concierto</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <th scope="row">%</th>
+                    </tr>
+                  </tbody>
+                </table>
+              )}
               <div className="card-footer text-body-secondary">
                 <h5 className="card-title">Jasai-Live</h5>
               </div>

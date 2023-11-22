@@ -5,7 +5,7 @@ import ReactApexChart from 'react-apexcharts';
 function Chart() {
   const [tiempoEnvio, setTiempoEnvio] = useState([]);
   const [totalPersonas, setTotalPersonas] = useState([]);
-  const [maxPersons, setMaxPersons] = useState(300);
+  const [maxPersons, setMaxPersons] = useState(100);
   const [maxPersonsInterval, setMaxPersonsInterval] = useState('');
   const [maxIntervalCount, setMaxIntervalCount] = useState(0);
   const [chartDataList, setChartDataList] = useState([]);
@@ -25,7 +25,7 @@ function Chart() {
 
       for (let i = 0; i <= 120; i += 20) {
         tiempoEnvioData.push(`${i}m`);
-        const randomValue = Math.floor(Math.random() * ((i <= 20 ? 20 : 300) / 30 + 1)) * 30;
+        const randomValue = Math.floor(Math.random() * ((i <= 20 ? 20 : 50) / 30 + 1)) * 30;
 
         if (randomValue > maxPersonsValue) {
           maxPersonsValue = randomValue;
@@ -62,7 +62,7 @@ function Chart() {
       setTimeout(() => {
         generateStaticData();
         setCurrentIteration(currentIteration + 1);
-      }, 10000);
+      }, 5000);
     }
 
     if (!showChart) {

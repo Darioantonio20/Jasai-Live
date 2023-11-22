@@ -62,7 +62,7 @@ function Chart() {
       setTimeout(() => {
         generateStaticData();
         setCurrentIteration(currentIteration + 1);
-      }, 5000);
+      }, 60000);
     }
 
     if (!showChart) {

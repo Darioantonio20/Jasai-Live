@@ -1,14 +1,14 @@
-import DarioFoto from "../../assets/img/darioFoto.png";
+import DarioFoto from "../../assets/img/imgpichi.jpg";
 import DavidFoto from "../../assets/img/imgLicCarlos.png";
 import CarlosFoto from "../../assets/img/imgLicDavid.png";
-import ElMasTalentoso from "../../assets/img/elMasTalentoso.png"
+import ElMasTalentoso from "../../assets/img/tocino.jpg"
 import "../../assets/styles/Pages.css";
 
 function AboutUs() {
 
   const personas = [
     {
-      nombre: 'Dario Antonio Gutiérrez Álvarez',
+      nombre: 'Cristian Gerardo Vazquez Ramos',
       puesto: 'Scrum Master & UX UI',
       foto: `${DarioFoto}`,
       facebookLink: 'https://www.facebook.com/dario.gutierrezalvares/',
@@ -32,7 +32,7 @@ function AboutUs() {
       linkedinLink: 'https://www.linkedin.com/in/dario-antonio-gutierrez-alvarez-41353a225/'
     },
     {
-      nombre: 'Chat GPT',
+      nombre: 'Alan David Balbuena Zavala',
       puesto: 'Scrum Team & Product Owner',
       foto: `${ElMasTalentoso}`,
       facebookLink: 'https://chat.openai.com/',

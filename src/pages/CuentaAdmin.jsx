@@ -9,7 +9,7 @@ function CuentaAdmin() {
 
   const controlServo = async (opcion) => {
     try {
-      const response = await fetch('http://192.168.1.106:5000/controlar_servo', {
+      const response = await fetch('http://192.168.:5000/controlar_servo', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

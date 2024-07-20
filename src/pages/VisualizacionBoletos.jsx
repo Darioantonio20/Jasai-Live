@@ -1,6 +1,3 @@
-
-
-
 import React, { useState, useEffect } from "react";
 import axios from 'axios';
 import Swal from 'sweetalert2';
@@ -30,7 +27,7 @@ const ProductListPage = () => {
 
   const addToCart = (product) => {
     const isProductInCart = cart.some((item) => item.id === product.id);
-    
+
     if (isProductInCart) {
       Swal.fire({
         icon: 'warning',
@@ -40,7 +37,7 @@ const ProductListPage = () => {
         timer: 2000,
       });
     } else {
-      axios.post('http://jasailive.xyz:5001/api/add-to-cart', product)
+      axios.post('http://jasailive.xyz:5001/api/add-to-cart', product)
         .then((response) => {
           Swal.fire({
             icon: 'success',

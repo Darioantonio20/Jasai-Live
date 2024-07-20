@@ -9,7 +9,8 @@ import EnVivo from '../pages/EnVivo';
 import '../assets/styles/App.css';
 
 // Importa el contexto
-import ContextoDeUsuario from '../context/ContextoDeUsuario';
+import ContextoDeUsuario from '../context/ContextoDeUsuario'
+
 import React, { useState } from 'react';
 
 function App() {
@@ -23,7 +24,7 @@ function App() {
         <BrowserRouter>
           <Routes>
             <Route path="/" element={<LandingPage />} />
-            <Route path="/inicioSesion" element={<InicioSesion />} />
+            <Route path="/InicioSesion" element={<InicioSesion />} />
             <Route path="/registro" element={<Registro />} />
             <Route path="/visualizacionBoletos" element={<VisualizacionBoletos />} />
             <Route path="/enVivo" element={<EnVivo />} />

@@ -8,11 +8,10 @@ function Registro() {
     const nameRef = useRef();
     const contrasenaRef = useRef();
     const correoRef = useRef();
-    const formRef = useRef(); // Agrega una referencia para el formulario
-
+    const formRef = useRef();
     const handlerClick = (e) => {
         e.preventDefault();
-        const formData = new FormData(formRef.current); // Usa la referencia del formulario
+        const formData = new FormData(formRef.current);
         let URI = "http://127.0.0.1:3000/Usuarios";
         let options = {
             method: "POST",
@@ -27,17 +26,28 @@ function Registro() {
         };
         console.log(options.body);
         fetch(URI, options)
-            .then((response) => response.json())
+            .then((response) => {
+                if (!response.ok) {
+                    throw new Error('Error al registrar el usuario');
+                }
+                return response.json();
+            })
             .then((data) => {
                 alert(JSON.stringify(data));
 
-                //Alert con Sweetaler
                 Swal.fire({
                     text: JSON.stringify("Bienvenido " + data.Nombre)
                 });
+            })
+            .catch((error) => {
+                console.error('Error:', error);
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Oops...',
+                    text: 'Algo salió mal al registrar el usuario!',
+                });
             });
-    };
-
+        }
     return (
         <>
             <NavBar />
@@ -48,7 +58,7 @@ function Registro() {
                             <div className="card cascading-right estiloCard">
                                 <div className="card-body p-5 shadow-5 text-center">
                                     <h2 className="fw-bold mb-5">Inicio de sesión</h2>
-                                    <form ref={formRef}> 
+                                    <form ref={formRef}>
                                         <div className="form-outline mb-4">
                                             <input
                                                 type="text"
